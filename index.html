@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+</style>
+<body>
+<script src="./vue.js"></script>
+
+<div id="app">
+  <button @click="show=!show">toggle</button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+  <my-p/>
+</div>
+<script>
+  Vue.component('my-p', {
+    template: `<p>ddddd</p>`
+  } )
+  const app = new Vue({
+    el:'#app',
+    // component: ,
+    data: {
+      massage: '房贷首付',
+      show: false,
+      number: 1,
+      title: '页面加载于 ' + new Date().toDateString(),
+    }
+  })
+</script>
+</body>
+</html>
