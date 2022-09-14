@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <base-title title="我是标题"></base-title>
+<!--  文本-->
+  <input v-model="name" type="text">
+  name: {{name}}
+<!--  文本框-->
+  <br/>
+  <textarea  v-model="content" name="" id="" cols="30" rows="10"></textarea>
+  content: {{content}}
+<!--  checkbox-->
+  <br/>
+  <input type="checkbox" v-model="checked" true-value="yes" false-value="no">
+  checked: {{checked}}
+  <br/>
+<!--  checkboxs-->
+  <input type="checkbox" id="jack" value="jack" v-model="checkeds">
+  <label for="jack">jack</label>
+  <input type="checkbox" id="maka" value="maka" v-model="checkeds">
+  <label for="maka">maka</label>
+  <div>checkeds:{{ checkeds }}</div>
+  <br/>
+<!--  radio-->
+  <input type="radio" id="one" value="one" v-model="picked">
+  <label for="one">one</label>
+  <input type="radio" id="tow" value="tow" v-model="picked">
+  <label for="tow">tow</label>
+  <div>picked:{{ picked }}</div>
+  <p-numbers v-model="number">
+    问问
+  </p-numbers>
+  <button v-for="item in tabs" :key="item" @click="chengeTabs(item)">{{ item }}</button>
+  <component :is="currentTabComponent" v-model="number"></component>
+<!--  使用局部组件-->
+  <local-component-a @send-msg="sendMsg"></local-component-a>
+</div>
+<!--<template id="myNum">-->
+<!--  -->
+<!--</template>-->
+<script src="vue.js"></script>
+<script>
+  // import BaseTitle from './BaseTitle';
+  Vue.component('p-numbers', {
+    name: 'numbers',
+    props: {
+      value: {
+        type: Number,
+      }
+    },
+    mounted() {
+      console.log(this.prop);
+    },
+    template: `<div class="myNum">
+    <div class="num">{{ value }}</div>
+    <button @click="$emit('input', value + 1)">+1</button>
+    <button @click="$emit('input', value - 1)">-1</button>
+    <div class="content">
+      <slot v-slot="header"></slot>
+    </div>
+  </div>`
+  });
+  Vue.component('p-home',{
+    name: 'home',
+    template: `<div>我是home页面</div>`
+  })
+  Vue.component('p-post',{
+    name: 'post',
+    template: `<div>我是post页面</div>`
+  })
+  // 局部组件
+  // 构造局部组件
+  const LocalComponentA = {
+    template: `<div @click="$emit('send-msg', 'sss')">我是局部组件</div>`
+  }
+  const app = new Vue({
+    el: '#app',
+    components: {LocalComponentA}, // 注册局部组件
+    data: {
+      tabs: ['Numbers', 'Home', 'Post'],
+      currentTabComponent: 'p-home',
+      name: 'zsy',
+      content: '',
+      checked: 'yes',
+      checkeds: [],
+      picked: '',
+      number: 0,
+    },
+    methods: {
+      chengeTabs(tabName) {
+        this.currentTabComponent = 'p-' + tabName.toLowerCase();
+      },
+      sendMsg(msg) {
+        console.log(msg);
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+  .vmclass {
+    background-color: gold;
+  }
+  .font24 {
+    font-size: 20px;
+  }
+  .red {
+    color: red;
+  }
+  .father {
+    width: 200px;
+    height: 200px;
+    background-color: gold;
+    overflow: scroll;
+  }
+  .son {
+    width: 100px;
+    height: 500px;
+    background-color: pink;
+  }
+</style>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="./vue.js"></script>
+
+<div id="app">
+<!--  <ul>  <li    v-for="user in users"    v-if="user.isActive"    :key="user.id"  >    {{ user.name }}  </li></ul>-->
+<!--  <button v-on:[eventName]="obj.foo = '粉红色' ">toggle</button>-->
+  <button @click="listData[0].name = '87654321'">toggle</button>
+  <button @click="warn('警告', $event)">warn</button>
+
+<!--  修饰符-->
+  <a  href="javascript:alert('ddf')">
+    <div @click="clickFather" @scroll.passive="scrollFather"  class="father">father
+      <div @click.self.prevent="clickSon"  class="son">son<div class="mhyson" @click="mySon">mhyson</div></div>
+    </div>
+  </a>
+
+  <form @submit.prevent>
+    <input type="text" v-model="form.name" @input="setValue($event.target)">
+    <button type="submit" @keyup.tab="onSubmit">submit</button>
+  </form>
+<!--  <template v-if="show" >-->
+<!--    <label>Username</label>-->
+<!--    <input key="1" placeholder="Enter your username">-->
+<!--  </template>-->
+<!--  <template v-else key="2">-->
+<!--    <p>dd</p>-->
+<!--    <label>Email</label>-->
+<!--    <input key="2" placeholder="Enter your email address">-->
+<!--  </template>-->
+  <ul v-for="(set, index) of sets">
+    <li v-for="(item, index) of even(set)" :key="index">{{item}}</li>
+  </ul>
+  <ul>
+    <li v-for="(value, name, index) of objData" :key="name">{{index}} {{name + ':' + value}}</li>
+  </ul>
+<!--  <div><span v-for="n in 10">{{n}}</span></div>-->
+  <div>
+  <!--  <input @[eventname]="event" />-->
+  <!--  <button @click="eventname='change'">change</button>-->
+  <!--  <button @click="eventname='focus'">focus</button>-->
+  <!--  <button @click="eventname=1">1</button>-->
+  <!--  <template v-if="show">-->
+  <!--    <h1>Title</h1>-->
+  <!--    <p>Paragraph 1</p>-->
+  <!--    <p>Paragraph 2</p>-->
+  <!--  </template>-->
+  <!--  <transition name="fade">-->
+  <!--    <p v-if="show">hello</p>-->
+  <!--  </transition>-->
+  <!--  <p v-once>{{obj.foo}}</p>-->
+  <!--  <p v-once>{{new Date().toLocaleString}}</p>-->
+  <!--  <p>my massage:{{massage}}</p>-->
+  <!--  <p>my Reverse massage:{{reverseMassage}}</p>-->
+  <!--  <p>-->
+  <!--    Ask a yes/no question:-->
+  <!--    <input v-model="question">-->
+  <!--  </p>-->
+  <!--  <p :style="{color: pColor}">{{ answer }}</p>-->
+  <!--  <p :style="pStyle">{{ answer }}</p>-->
+  <!--  <p :class="pClass">{{ answer }}</p>-->
+  <!--  <p :class="[]">{{ answer }}</p>-->
+  <!--  <p :class="objClass"></p>-->
+  <!--  <my-p :todo="todo" class="red" :class="{active: show}"/>-->
+</div>
+  input:<input value="dddd" id="watchInput" type="text"/>
+  <base-checkbox v-model="lovingVue" @change="valueChange"/>
+
+</div>
+<script>
+  const watchInput = document.querySelector('#watchInput');
+  console.log(watchInput.value);
+  watchInput.addEventListener('input', function (event) {
+    console.log(event.target);
+    console.log(event.target.value);
+  })
+</script>
+<script>
+  Vue.component('my-p', {
+    props: ['todo'],
+    template: `<p class="ds">{{todo.text}}</p>`
+  });
+  Vue.component('base-checkbox', {
+    model: {
+      prop: 'checked',
+      event: 'change',
+    },
+    props: {
+      checked: Boolean,
+    },
+    template: `
+      <input type="checkbox"
+        v-bind:checked="checked"
+        @change="$emit('change', $event.target.checked)"
+      >
+    `,
+  })
+  const obj = {
+    foo: 'bar',
+  }
+  // Object.freeze(obj);
+  const app = new Vue({
+    el:'#app',
+    // component: ,
+    data: {
+      lovingVue: true,
+      form: {
+        name: '',
+      },
+      sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]],
+      objData: {
+        name: 'zsy',
+        age: 24,
+        phone: 18783298132
+      },
+      listData: [
+        '发送到', 'dff', 'fsdfds'
+        ],
+      ok: true,
+      question: '',
+      answer: 'I cannot give you an answer until you ask a question!',
+      eventname: 'focus',
+      massage: '房贷首付',
+      show: false,
+      number: 1,
+      title: '页面加载于 ' + new Date().toDateString(),
+      todo: {
+        text: '对冯绍峰'
+      },
+      obj,
+      ssa: '',
+      pColor: 'red',
+      pStyle: {
+        fontSize: '30px',
+        backgroundColor: 'pink',
+      },
+      pClass: 'vmclass font24'
+    },
+    watch: {
+      question: function (newQustion, oldQuestion) {
+        this.answer = 'Waiting for you to stop typing...';
+        this.debounceGetAnswer();
+      },
+      // 'form.name': function (newV) {
+      //   console.log(newV);
+      // }
+    },
+    computed: {
+      reverseMassage:{
+        get: function() {
+          return this.massage.split('').reverse().join('');
+        },
+        set: function(newValue) {
+            this.massage = newValue.split('').reverse().join('');
+        }
+      },
+      objClass() {
+        return {
+          active: this.show && !this.error,
+          'text-danger': this.error,
+        }
+      }
+      // reverseMassage() {
+      //   return this.massage.split('').reverse().join('');
+      // }
+    },
+    created() {
+      this.debounceGetAnswer = _.debounce(this.getAnswer, 500);
+    },
+    mounted() {
+      // this.init();
+    },
+    methods: {
+      valueChange(val) {
+        console.log(val)
+      },
+      setValue(target) {
+        const val = target.value.toString().replace(/[^0-9]/ig, '');
+        this.form.name = val.replace(/(\d{4})(?=\d)/g, '$1 ')
+        console.log(this.form.name);
+      },
+      onSubmit() {
+        console.log('onSubmit');
+      },
+      scrollFather() {
+        console.log('scrollFather');
+      },
+      clickSon() {
+        console.log('clickSon');
+      },
+      clickFather() {
+        console.log('clickFather');
+      },
+      mySon() {
+        console.log('mySon');
+      },
+      warn(message, event) {
+        if (event) {
+          event.preventDefault();
+        }
+        alert(message);
+      },
+      even(datas) {
+        return datas.filter(i => { return i%2 === 0})
+      },
+      event() {
+        console.log('触发' + this.eventname + '事件')
+      },
+      getReverseMassage: function () {
+        console.log('执行了');
+        return this.massage.split('').reverse().join('');
+      },
+      getAnswer() {
+        if(this.question.indexOf('?')  === -1) {
+          this.answer ='Questions usually contain a question mark. ;-)';
+          return ;
+        }
+        this.answer = 'Thinking...';
+        const vm = this;
+        axios.get('https://yesno.wtf/api')
+          .then(function (response) {
+            vm.answer = _.capitalize(response.data.answer)
+          })
+          .catch(function (error) {
+            vm.answer = 'Error! Could not reach the API. ' + error
+          })
+      }
+    },
+
+  })
+  // console.log(this);
+  // app.ssa = 'dsss';
+  // console.log(app);
+  app.$watch('show', (newV, oldV) => {
+    console.log(newV, oldV);
+  })
+  // app.$el.addEventListener('click', function () {
+  //   console.log(this);
+  // });
+  // app.$el.addEventListener('click', () => {
+  //   console.log(this);z
+  // })
+</script>
+</body>
+</html>

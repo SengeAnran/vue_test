@@ -4,8 +4,8 @@
  * Released under the MIT License.
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : // 判断是否在commonjs规则环境中， 是的还进行vue的一些配置
+  typeof define === 'function' && define.amd ? define(factory) : // 判断是否在amd规则环境中
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Vue = factory());
 })(this, (function () { 'use strict';
 
@@ -3922,7 +3922,7 @@
 
   function createLifeCycle(hookName) {
       return function (fn, target) {
-          if (target === void 0) { target = currentInstance; }
+          if (target === void 0) { target = currentInstance; } // target 未定义
           if (!target) {
               warn$2("".concat(formatName(hookName), " is called when there is no active component instance to be ") +
                       "associated with. " +
