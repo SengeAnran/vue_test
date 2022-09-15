@@ -3,6 +3,7 @@
     {{label}}：
     <input
       ref="input"
+      type="text"
       v-bind="$attrs"
       :value="value"
       v-on="inputListeners"
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+// import Pikaday from 'pikaday';
 export default {
   inheritAttrs: false,
   name: "BaseInput",
@@ -37,8 +39,14 @@ export default {
     }
   },
   mounted() {
-
-    console.log(this.inputListeners);
+    // const picker = new Pikaday({
+    //   field: this.$refs.input,
+    //   format: 'YYYY-MM-DD'
+    // })
+    // console.log(this.inputListeners);
+    // this.$once('hook:beforeDestroy', function () {
+    //   picker.destroy();
+    // })
   },
   methods: {
     focus() {
@@ -49,5 +57,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
