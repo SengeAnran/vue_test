@@ -54,7 +54,7 @@
       }
     },
     mounted() {
-      console.log(this.prop);
+      console.log(this.$root);
     },
     template: `<div class="myNum">
     <div class="num">{{ value }}</div>
@@ -71,12 +71,16 @@
   })
   Vue.component('p-post',{
     name: 'post',
-    template: `<div>我是post页面</div>`
+    template: `<div>我是post页面</div>`,
+
   })
   // 局部组件
   // 构造局部组件
   const LocalComponentA = {
-    template: `<div @click="$emit('send-msg', 'sss')">我是局部组件</div>`
+    template: `<div @click="$emit('send-msg', 'sss')">我是局部组件</div>`,
+    mounted() {
+      console.log(this.$root);
+    }
   }
   const app = new Vue({
     el: '#app',

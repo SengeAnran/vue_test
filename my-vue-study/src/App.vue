@@ -18,6 +18,7 @@
       <template v-slot:otherLike>其他爱好</template>
     </base-person-info>
     <base-input
+      ref="input"
       v-on:focus="onFocus"
       v-model="inputValue"
       label="发士大夫"
@@ -30,6 +31,7 @@
       label="发士大夫"
       :title="1323"
     ></base-input>
+    <button @click="fucus">fucus</button>
   </div>
 </template>
 
@@ -53,10 +55,17 @@ export default {
       inputValue2: '',
     }
   },
+  provide() {
+    return {
+      sing: this.sing,
+    }
+  },
   watch:{
     'inputValue': function (val) {
       console.log(val)
     }
+  },
+  mounted() {
   },
   methods: {
     removeLike(index) {
@@ -68,6 +77,12 @@ export default {
     chengeScope(scope) {
       console.log(scope);
       return scope.row[1];
+    },
+    fucus() {
+      this.$refs.input.focus();
+    },
+    sing() {
+      console.log('我开始唱歌了！！！');
     }
   }
 }

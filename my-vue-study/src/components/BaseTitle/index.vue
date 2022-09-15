@@ -14,6 +14,12 @@ export default {
   props: {
     title: String,
     smallTitle: String,
+  },
+  inject: ['sing'],
+  mounted() {
+    this.sing();
+    console.log(111);
+    // console.log(this.$root.$children[0]);
   }
 }
 </script>

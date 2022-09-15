@@ -2,6 +2,7 @@
   <label>
     {{label}}：
     <input
+      ref="input"
       v-bind="$attrs"
       :value="value"
       v-on="inputListeners"
@@ -36,7 +37,13 @@ export default {
     }
   },
   mounted() {
+
     console.log(this.inputListeners);
+  },
+  methods: {
+    focus() {
+      this.$refs.input.focus();
+    }
   }
 }
 </script>
