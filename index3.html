@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>vue响应式原理</title>
 </head>
 <body>
-$END$
+<div id="msg"></div>
+<div id="age"></div>
+<script type="application/javascript">
+  // 模拟的vue实例中的数据data
+  const data = {
+    msg: '',
+    age: 19,
+  }
+  // vue 实例
+  let vm = {};
+  function proxyData(data) {
+    // 遍历data对象中的各属性
+    Object.keys(data).forEach((key) => {
+      // 对各属性就行数据劫持
+      Object.defineProperty(vm,key,{
+        get() {
+          return data[key];
+        },
+        set(v) {
+          if (v === data[key]) return;
+          data[key] = v;
+          document.querySelector(`#${key}`).textContent = v;
+        },
+
+      })
+    })
+  }
+  // 调用方法
+  proxyData(data);
+
+</script>
 </body>
 </html>
