@@ -24,6 +24,7 @@ export default {
     value: String,
     label: String,
   },
+  inject:['sing'],
   computed: {
     inputListeners() {
       const vm = this;
@@ -39,6 +40,7 @@ export default {
     }
   },
   mounted() {
+    // this.sing();
     // const picker = new Pikaday({
     //   field: this.$refs.input,
     //   format: 'YYYY-MM-DD'

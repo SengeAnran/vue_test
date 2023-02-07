@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+  <script>
+    //1.原型链继承 实例使用同一个原型对象，内存空间共享，改变原型对象内的值一改全改
+    // 2.构造函数继承 call， 实例继承的属性不会共享空间
+    // 3.组合继承 （构造函数 + 原型对象） 既继承属性和方法不共享空间，也可使用父类的原型对象方法， 但要调用父类两次
+    // 4.原型式继承 可继承父类死属、方法和父类原型对象方法，实例们的继承属性和方法共享空间，只调用父类一次，
+
+    // function Parent(name) {
+    //   this.name = name;
+    //   this.exi = '男';
+    //   this.play = [1, 2, 3];
+    //   this.sing = function () {
+    //     console.log('my age', this.age);
+    //   }
+    // }
+    // Parent.prototype.getName = function () {
+    //   return this.name;
+    // }
+    // function clone(parent, son) {
+    //  son.prototype = Object.create(parent.prototype); // 子类原型对象指向父类原型对象
+    //  son.prototype.constructor = son;
+    // }
+    // function Son(name, age) {
+    //   Parent.call(this,name);
+    //   this.age = age
+    // }
+    // clone(Parent,Son);
+
+    // console.log(new Parent('张家春'));
+  class Parent {
+    constructor(name) {
+      this.name = name;
+      this.exi = '男';
+      this.play = [1, 2, 3];
+    }
+    sing () {
+      console.log('my age', this.age);
+    }
+  }
+    Parent.prototype.getName = function () {
+      return this.name;
+    }
+  class Son  extends Parent{
+    constructor(name, age) {
+      super(name);
+      this.age = age;
+    }
+  }
+    const son1 = new Son('张森云', 23);
+    const son2 = new Son('黄倩', 22);
+    son1.play.push(5);
+    // console.log(son1.exi, son2.exi);
+    // console.log(son1.play, son2.play);
+    // console.log(son1, son2);
+    // console.log(son1.getName());
+    // console.log(son2.getName());
+    // son1.sing();
+    // son2.sing();
+    const arr = [1];
+    console.log(arr instanceof Object);
+    function fun1(...args) {
+      console.log(this,args);
+    }
+    const abj = {
+      a: 1,
+    }
+    const fun2 = fun1.bind(abj, 1,2);
+    fun2();
+    fun1();
+
+  </script>
+  </body>
+</html>

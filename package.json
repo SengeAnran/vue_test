@@ -19,4 +19,8 @@
   "dependencies": {
     "element-ui": "^2.15.12"
   }
+  "homepage": "https://github.com/SengeAnran/vue_test#readme",
+  "dependencies": {
+    "animate.css": "^4.1.1"
+  }
 }

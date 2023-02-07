@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>状态过渡</title>
+    <style>
+      .color-box {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: absolute;
+      }
+      .father {
+        background-color: yellow;
+      }
+      .son {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        float: left;
+      }
+      .father::after {
+        display: inline-block;
+        content: "";
+        height: 0;
+        visibility: hidden;
+        clear: both;
+position: fixed;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="father">
+      <div class="son"></div>
+    </div>
+    <a style="margin: 20px; padding: 20px;">sss</a>
+    <i style="margin: 20px; padding: 20px;">sss</i>
+    <div id="app">
+<!--      数字-->
+      <input type="number" v-model="number">
+      <p>{{animatedNumber}}</p>
+<!--      颜色-->
+      <input type="color" v-model="color"><button @click="tweenedColor = color">update</button>
+      <div class="color-box" :style="{backgroundColor: animatedColor}"></div>
+      <p>{{animatedColor}}</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
+    <script src="vue.js"></script>
+    <script>
+      // 定义一个混入对象
+      // const myMixin = {
+      //   data() {
+      //     return {
+      //       number: 0,
+      //       tweenedNumber: 0,
+      //       dds: 'ddd',
+      //     }
+      //   },
+      //   created() {
+      //     // this.hello();
+      //     console.log(this.$data);
+      //   },
+      //   methods: {
+      //     // hello() {
+      //     //   console.log('hello from mixin');
+      //     // }
+      //   }
+      // }
+      // // Vue继承加入混入对象
+      // const Component = Vue.extend({
+      //   mixins: [myMixin],
+      // })
+      // new Component();
+      Vue.mixin({
+        myOption: 'mixin option',
+        created() {
+          const myOption = this.$options.myOption;
+          if (myOption) {
+            console.log(myOption);
+            // myOption();
+          }
+        }
+      })
+      Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
+        console.log(toVal, fromVal);
+        if (fromVal) return toVal + fromVal;
+        // return fromVal;
+      }
+      new Vue({
+        // mixins: [myMixin],
+        el: '#app',
+        data() {
+          return {
+            number: 0,
+            tweenedNumber: 0,
+            color: '',
+            tweenedColor: '',
+            animatedColor: 'pink',
+          }
+        },
+        myOption: 'hello myOption',
+        computed: {
+          animatedNumber() {
+            return this.tweenedNumber.toFixed(0);
+          }
+        },
+        watch: {
+          number(val) {
+            gsap.to(this.$data, {duration: 0.5, tweenedNumber: val}); // 设置tweenedNumber的值从当前值到新值的变化
+          },
+          tweenedColor(val) {
+            gsap.to(this.$data, {duration: 2.5, animatedColor: val}); // 设置tweenedNumber的值从当前值到新值的变化
+          }
+        },
+        created() {
+          // this.hello();
+          console.log(this.$data);
+        },
+      })
+    </script>
+  </body>
+</html>

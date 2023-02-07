@@ -14,7 +14,6 @@ export default {
   },
   // render函数的优先级低于template
   render:function (createElement) {
-    console.log(this, this.$slots, this.$scopedSlots)
     // 创建kebab-case 风格的id
     const headingId = getChildrenTextContent(this.$slots.default)
       .toLowerCase() // 全小写

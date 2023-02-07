@@ -5,6 +5,20 @@
   <title>Title</title>
 </head>
 <body>
-
+  <div id="app">
+    <hello-word></hello-word>
+  </div>
+  <script src="./vue.js"></script>
+  <script type="text/x-template" id="hello-word-template">
+    <p>Hello hello hello</p>
+  </script>
+<script>
+  Vue.component('hello-word', {
+    template: '#hello-word-template'
+  })
+const app = new Vue({
+  el: '#app',
+})
+</script>
 </body>
 </html>

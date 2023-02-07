@@ -36,11 +36,7 @@
     <button @click="fristLevel = (fristLevel + 1)%6">改变标题等级+1</button>
     <button @click="fristLevel = (fristLevel - 1)">改变标题等级-1</button>
     <a-title :level="fristLevel">
-      <template v-slot:default="scope">
-        Hello world!
-        {{scope.level}}
-        <p :style="{color: 'red'}">{{fristLevel}}</p>
-      </template>
+      <p :style="{color: 'red'}">{{fristLevel}}</p>
     </a-title>
     <a-title :level="2">What you name?</a-title>
     <a-title :level="3">My name is ZhangSenYun</a-title>
@@ -52,6 +48,7 @@
     <div class="lang-box" @scroll.passive="onScroll">
       <div class="box"></div>
     </div>
+    <top-a-title/>
 
   </div>
 </template>
@@ -59,9 +56,10 @@
 <script>
 import List from './components/Render/List';
 import RenderInput from './components/Render/RenderInput';
+import TopATitle from './components/Render/TopATitle';
 export default {
   name: 'App',
-  components: {RenderInput, List},
+  components: {TopATitle, RenderInput, List},
   data() {
     return {
       obj: {
@@ -89,7 +87,7 @@ export default {
   watch:{
     'inputValue': function (val) {
       console.log(val)
-    },
+    }
   },
   mounted() {
   },
