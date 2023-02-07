@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义指令</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-focus:add.foo.bar="1+1" v-frist:frist.amm="2+2">
+    <div v-demo:[argument].a.b="{ color: 'white', text: 'hello!' }"></div>
+    <br/>
+    <button @click="direction = 'left'">左</button>
+    <button @click="direction = 'right'">右</button>
+    <button @click="direction = 'top'">上</button>
+    <button @click="direction = 'bottom'">下</button>
+    <p v-pin:[direction]= "200">I am pinned onto the page at 200px to the left</p>
+    <anchored-heading :level="3">hello word</anchored-heading>
+  </div>
+<script type="text/x-template" id="anchored-heading-template">
+  <h1 v-if="level === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot></slot>
+  </h2>
+  <h3 v-else-if="level === 3">
+    <slot></slot>
+  </h3>
+  <h4 v-else-if="level === 4">
+    <slot></slot>
+  </h4>
+  <h5 v-else-if="level === 5">
+    <slot></slot>
+  </h5>
+  <h6 v-else-if="level === 6">
+    <slot></slot>
+  </h6>
+</script>
+  <script src="vue.js"> </script>
+  <script>
+    Vue.component('anchored-heading', {
+      // template: '#anchored-heading-template',
+      render: function (createElement) {
+        return createElement(
+          'h' + this.level,
+          this.$slots.default,
+        )
+      },
+      props: {
+        level: {
+          type:Number,
+          required: true,
+        }
+      }
+    })
+    // 注册一个自定义指令 v-focus
+    Vue.directive('focus', {
+      // 当被绑定元素插入到dom时
+      inserted: function (el, binding, vnode, oldvnode) {
+        // 聚焦元素
+        el.focus();
+      }
+    })
+    Vue.directive('demo', {
+      bind:function (el, binding, vnode) {
+        console.log(binding,vnode);
+        const s = JSON.stringify;
+        el.innerHTML= `
+            name: ${s(binding.name)}<br/>
+            value: ${s(binding.value)}<br/>
+            expression: ${s(binding.expression)}<br/>
+            argument: ${s(binding.arg)}<br/>
+            modifiers: ${s(binding.modifiers)}<br/>
+            vnode keys: ${s(Object.keys(vnode).join(', '))}<br/>
+          `
+      }
+    })
+    // Vue.directive('pin', {
+    //   bind(el, binding)  {
+    //     el.style.position= 'fixed';
+    //     el.style[binding.arg] = binding.value + 'px';
+    //   },
+    //   update: function (el, binding) {
+    //     el.style[binding.arg] = binding.value + 'px';
+    //   }
+    // })
+    // 函数简写
+    //bind 和 update 时触发相同行为
+    Vue.directive('pin', function (el, binding) {
+        el.style.position= 'fixed';
+        el.style[binding.arg] = binding.value + 'px';
+      })
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: 'hello',
+          argument: 'nnnd',
+          direction: 'left',
+        }
+      },
+      // 局部注册自定义指令
+      directives: {
+        // focus: {
+        //   inserted: (el) => {
+        //     el.focus();
+        //   }
+        // }
+        frist: {
+          inserted:(el) => {
+            el.value = 33;
+          },
+          bind(el, binding, vnode) {
+
+          }
+        }
+      },
+      mounted() {
+        // this.$refs.input.focus();
+      }
+    })
+  </script>
+</body>
+</html>

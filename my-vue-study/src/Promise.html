@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * new Promise创建一个Promise对象
+   * Promise中传入一个箭头函数
+   * 箭头函数中有两个回掉函数参数resolve, reject，
+   * 我们会根据请求成功与否决定调用那个回掉参数
+   * 成功调用resolve（message），这个时候后续的then会被回调
+   * 失败调用reject（error），这个时候后续的catch会被回调
+   */
+  // const myPromise = new Promise((resolve, reject) => {
+  //   setTimeout(() => { // 异步
+  //     console.log('ss');
+  //     resolve({name: 'zsy'})
+  //   }, 1000)
+  // }).then(res => {
+  //   console.log(res);
+  //   // 返回一个promise 对象
+  //   const data = {...res, age: 25};
+  //   // 最初写法
+  //   // return new Promise((resolve, reject) => {
+  //   //   resolve(data);
+  //   // })
+  //   // 简化1
+  //   // return Promise.resolve(data);
+  //   // 简化2
+  //   throw data; // 抛出错误
+  // }).then(res => { // 实现链式调用
+  //   console.log(res);
+  // }).catch(err => {
+  //   console.log('err' , err);
+  // })
+  // 原始需求 ： 需要在两个异步请求都执行后进行下一步操作
+  // 原始写法
+  // //      请求一
+  // let isResult1 = false
+  // let isResult2 = false
+  // $.ajax({
+  //   url: '',
+  //   success: function () {
+  //     console.log('结果1');
+  //     isResult1 = true;
+  //     handleResult()
+  //   }
+  // })
+  //
+  // //   请求二
+  // $.ajax({
+  //   url: '',
+  //   success: function () {
+  //     console.log('结果2');
+  //     isResult2 = true;
+  //     handleResult()
+  //   }
+  // })
+  Promise.all([new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({name: 'zsy'});
+      },1000)
+  }), new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({age: 24});
+    },3000)
+  })]).then(res => {
+    console.log(res);
+    }
+  )
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      text-align: center;
+      padding-top: 200px;
+    }
+    .btn{
+      position: relative;
+      width: 359px;
+      height: 110px;
+      border-radius: 25px;
+      font-size: 33px;
+      font-weight: 600;
+      border: solid 2px ;
+      box-shadow: 0 0 5px #878787;
+      background-color: white;
+    }
+    .box1 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% - 4px);
+      height: calc(100% - 4px);
+      border-radius: 25px;
+      background-color: #cbcbcb;
+    }
+    .box2 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% - 18px);
+      height: calc(100% - 18px);
+      border-radius: 20px;
+      box-shadow: 0 2px 5px #878787;
+      background: linear-gradient(#dbdbdb 0,#d2d2d2 50%,#c2c2c2 55%, #afafaf 100%) ;
+      text-align: center;
+      line-height: 89px;
+      color: #555555;
+    }
+    .star {
+      position: absolute;
+      top: 30%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-bottom: 18px solid;
+      border-left: 8px solid rgba(0,0,0,0);
+      border-right: 8px solid rgba(0,0,0,0);
+      border-bottom-color: #888888;
+    }
+    .star1 {
+      left: 20px;
+
+    }
+    .star2 {
+      right: 20px;
+
+    }
+    .star::before {
+      position: absolute;
+      top: 15px;
+      left: -22px;
+      transform: rotate(38deg);
+      content: '';
+      width: 0;
+      height: 0;
+      border-bottom: 21.8px solid;
+      border-left: 26.7px solid rgba(0,0,0,0);
+      border-right: 26.7px solid rgba(0,0,0,0);
+      border-bottom-color: #888888;
+    }
+    .star::after {
+      position: absolute;
+      top: 15px;
+      left: -29px;
+      transform: rotate(320deg);
+      content: '';
+      width: 0;
+      height: 0;
+      border-bottom: 21.8px solid;
+      border-left: 26.7px solid rgba(0,0,0,0);
+      border-right: 26.7px solid rgba(0,0,0,0);
+      border-bottom-color: #888888;
+    }
+  </style>
+</head>
+<body>
+<button class="btn">
+  <div class="box1">
+    <div class="box2">
+      CHECKOUT
+      <div class="star star1"></div>
+      <div class="star star2"></div>
+    </div>
+  </div>
+</button>
+</body>
+</html>

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/SengeAnran/vue_test/issues"
   },
-  "homepage": "https://github.com/SengeAnran/vue_test#readme"
+  "homepage": "https://github.com/SengeAnran/vue_test#readme",
+  "dependencies": {
+    "element-ui": "^2.15.12"
+  }
 }

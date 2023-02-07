@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+/*    编写 css 代码，将 id 为 "foo" 的 div 内的第一个 ul 中的 所有偶数行 li 的文字设置为红色。*/
+#foo>ul:first-of-type li:nth-child(2n) {
+  color: red;
+}
+  </style>
+</head>
+<body>
+<div id="foo">
+  <p>Countries</p>
+  <ul>
+    <li>China</li>
+    <li>Japan</li>
+    <li>Korea</li>
+    <li>Korea</li>
+  </ul>
+  <p>Age</p>
+  <ul>
+    <li>13</li>
+    <li>17</li>
+    <li>20</li>
+  </ul>
+</div>
+<script>
+  // "use strict"
+  var a = "hello";
+  var b = "s hello world";
+  // console.log(b.indexOf(a)); // a 在 b 中出现的位置
+  const c = 123;
+  // console.log(parseInt('20', 3));
+  // console.log(c.toString( 2));
+  // console.log(new Date().getMonth() + 1);
+  // 组合继承 （构造函数继承 + 原型链继承）
+  function Father(name) {
+    this.name = name;
+    this.like = [1,2];
+    this.sing = function () {
+      console.log('sing');
+    }
+  }
+  // 原型上放一些不边的属性和方法
+  Father.prototype.eat = function () {
+    console.log(this.name+ 'eating');
+  }
+  Father.prototype.home = '张家';
+  function Son(name, age) {
+    Father.call(this, name);
+    this.age = age;
+  }
+  // Son.prototype = Father.prototype; // 会改变父构造函数的construtor指向， 采用Object.create则不会
+  // Son.prototype.constructor = Son;
+  Son.prototype = new Father();
+  // Son.prototype = Object.create(Father.prototype);
+  Son.prototype.constructor = Son; // 不设置 constructor会指向Father构造函数
+  const son1 = new Son('张森云', 27);
+  const son2 = new Son('黄倩', 25);
+  son1.like.push(3);
+  // console.dir(Son)
+  // console.log(son1);
+  // console.log(son2);
+  // console.dir(Object);
+  const newObj = Object.create(null, {
+    name: { value: 'zsy', enumerable: true}
+  }); //对象存在不可预期的行为
+  Father.prototype.home = '张家s';
+  function hasPerson(name) {
+    return name in newObj;
+  }
+  function getObj(name) {
+    return newObj[name];
+  }
+// Object.keys(newObj).forEach(i => console.log(i));
+//   console.log(hasPerson('hasOwnProperty'));
+//   console.log(getObj('toString'));
+//   console.log(newObj);
+  class Person { // ES6无变量提升
+    constructor(name, age) {
+      this.name = name; // 子类继承的属性
+      this.age = age;
+    }
+    getName() { // 子类可继承的原型方法
+      return 'My name is ' + this.name;
+    }
+  }
+  class PersonSon extends Person {
+    constructor(name, age, like) {
+      super(name, age); // 调用父类的构造函数
+      this.like = like;
+    }
+    getMyLike() { // 子类自己的方法
+      return super.getName() + ',my like is' + this.like.join(',');
+    }
+  }
+  const person1 = new Person('zsy', 27);
+  const personSon1 = new PersonSon('黄倩', 25, ['唱歌', '骑行','看电影']);
+  // console.log(person1);
+  // console.log(personSon1);
+  // console.log(parseInt('123'))
+  const encodeStr = encodeURI('123&name=张三');
+  const encodeStr2 = encodeURIComponent('123&name=张三');
+  const encodeStr3 = JSON.stringify('123&name=张三');
+  // console.log(encodeStr);
+  // console.log(encodeStr2);
+  // console.log(encodeStr3);
+  const decodeStr = decodeURIComponent(encodeStr2);
+  // console.log(decodeStr);
+  // eval("alert('hi')");
+  // alert('hi');
+  // eval("var msg = 'hello word'");
+  // alert(msg);
+  // alert(document.);
+  const arr = [1, 2,3];
+  const [arr1, arr2] = arr;
+  const arr4 = [...arr];
+  // console.log(arr1, arr2);
+  // console.log(arr4);
+  // 剩余参数接收剩余的函数参数
+  function fun1(name, ...content) {
+    console.log(name);
+    console.log(content);
+  }
+  fun1('zhang',{name: 'ss'},[1,2]);
+  const [ar1, ...ar2] = arr;
+  // console.log(ar1, ar2);
+  const resArr = new Set([1,2,2,3,4,5,7,5,6]); // 可以去重
+  const newResArr = [...resArr];
+  // console.log(resArr,resArr.size);
+  // console.log(newResArr);
+  //拓展运算符拆分数组
+  const o = {
+    names: 'ss',
+  }
+  const names = 'zsy';
+  function binF() {
+    console.log(this);
+    console.log(this.names);
+  }
+  const binFNew = binF.bind(o);
+  binF();
+  binFNew();
+</script>
+</body>
+</html>

@@ -32,12 +32,36 @@
       :title="1323"
     ></base-input>
     <button @click="fucus">fucus</button>
+    <br/>
+    <button @click="fristLevel = (fristLevel + 1)%6">改变标题等级+1</button>
+    <button @click="fristLevel = (fristLevel - 1)">改变标题等级-1</button>
+    <a-title :level="fristLevel">
+      <template v-slot:default="scope">
+        Hello world!
+        {{scope.level}}
+        <p :style="{color: 'red'}">{{fristLevel}}</p>
+      </template>
+    </a-title>
+    <a-title :level="2">What you name?</a-title>
+    <a-title :level="3">My name is ZhangSenYun</a-title>
+    <a-title :level="4">Are you?</a-title>
+    <a-title :level="5">I'am no name.</a-title>
+    <list :items="personInfo.like"></list>
+    <list></list>
+    <render-input v-model="renderValue"></render-input>
+    <div class="lang-box" @scroll.passive="onScroll">
+      <div class="box"></div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import List from './components/Render/List';
+import RenderInput from './components/Render/RenderInput';
 export default {
   name: 'App',
+  components: {RenderInput, List},
   data() {
     return {
       obj: {
@@ -53,6 +77,8 @@ export default {
       },
       inputValue: '',
       inputValue2: '',
+      fristLevel: 1,
+      renderValue: 222,
     }
   },
   provide() {
@@ -63,7 +89,7 @@ export default {
   watch:{
     'inputValue': function (val) {
       console.log(val)
-    }
+    },
   },
   mounted() {
   },
@@ -83,10 +109,25 @@ export default {
     },
     sing() {
       console.log('我开始唱歌了！！！');
+    },
+    onScroll() {
+      console.log('scroll');
     }
   }
 }
 </script>
 
 <style>
+.lang-box {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+  overflow: scroll;
+
+}
+.box {
+  width: 40px;
+  height: 300px;
+  background-color: red;
+}
 </style>

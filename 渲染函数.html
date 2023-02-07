@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="vue.js"></script>
+<div id="app">
+  <anchored-heading :level="fristTitle">我是一级标题</anchored-heading>
+  <anchored-heading :level="2">我是二级标题</anchored-heading>
+  <anchored-heading :level="3">我是三级标题</anchored-heading>
+  <button @click="fristTitle = 4">切换一级标题为四级标题</button>
+  <button  @click="fristTitle = 1">切换四级标题为一级标题</button>
+</div>
+<script>
+  // 渲染函数的作用动态创建标签
+  // 创建单个标签
+  Vue.component('anchored-heading', {
+    render: function (createElement) { // 渲染函数钩子
+      return createElement(
+        'h' + this.level, // 标签名称
+        this.$slots.default, // 标签的内容
+      )
+    },
+    props: {
+      level: {
+        type:Number,
+        required: true,
+      }
+    }
+  }); // 注册全局组件
+  // 创建
+  const app = new Vue( {
+    el: '#app',
+    data: {
+      fristTitle: 1,
+    }
+  })
+</script>
+</body>
+</html>

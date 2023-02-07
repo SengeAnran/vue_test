@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script>
+  function createComparisonFunction(propertyName) {
+    const name = 'zxfd';
+    return function (object1, object2) {
+      console.log(arguments);
+      const value1 = object1[propertyName];
+      const value2 = object2[propertyName];
+      console.log(name);
+      return value1 < value2 ? -1 : value1 > value2 ? 1: 0;
+    }
+  }
+  const object1 = {
+    age: 25,
+  }
+  const object2 = {
+    age: 27,
+  }
+  // 创建函数
+  let compareAge = createComparisonFunction('age')
+  // 调用函数
+  // const res = compareAge(object1,object2);
+  // 函数被调用时创建一个执行环境和对应的作用域链，使用arguments和其他命名参数来初始化函数的活动对象；外部函数的活动对象处于第二位以此类推；
+  compareAge  = null;// 注销匿名函数，销毁对应作用域链上的活动对象
+  // console.log(res);
+  // 变量于闭包
+  function createFunction() {
+    const result = new Array();
+    for (let i = 1 ; i< 10; i++) {
+      result[i] = function (num) {
+        return function () {
+          return num;
+        };
+      }(i);
+    }
+    return result;
+  }
+  const res = createFunction(); // 生成数组函数
+  // console.log(res[1]());
+
+  const obj = {
+    arr: [1,2,3],
+    litleObj: {
+      name: 'sads',
+      age: 34,
+    }
+  }
+  // 浅拷贝
+  let newObj = {};
+  // Object.assign(newObj, obj);
+  /**
+   * This is just a simple version of deep copy
+   * Has a lot of edge cases bug
+   * If you want to use a perfect deep copy, use lodash's _.cloneDeep
+   * @param {Object} source
+   * @returns {Object}
+   */
+  function deepClone(source) {
+    if (!source && typeof source !== 'object') {
+      throw new Error('error arguments', 'deepClone');
+    }
+    const targetObj = source.constructor === Array ? [] : {};
+    Object.keys(source).forEach((keys) => {
+      if (source[keys] && typeof source[keys] === 'object') {
+        targetObj[keys] = deepClone(source[keys]);
+      } else {
+        targetObj[keys] = source[keys];
+      }
+    });
+    return targetObj;
+  }
+  /**
+   *
+   * @param target  目标对象
+   * @param source  数据源对象
+   * @returns {*} 目标对象
+   */
+
+  function deepCopy(target, source) {
+    if (!source || typeof source !== 'object') {
+      return console.log('数据源对象格式错误');
+    }
+    Object.keys(source).forEach(sourceKey => {
+      target[sourceKey] = source[sourceKey] instanceof Array ? []: {};
+      if (source[sourceKey] instanceof Object) {
+        return deepCopy(target[sourceKey], source[sourceKey]);
+      }
+      target[sourceKey] = source[sourceKey];  // 简单数据类型
+    })
+    return target;
+  }
+  // deepCopy(newObj, obj);
+  // newObj.arr.push(4);
+  // console.log(obj, newObj);
+  const name = 'The Window';
+  const object = {
+    name: 'The Object',
+    getNameFunc: function () {
+      const that = this;
+      return function () {
+        return that.name;
+      }
+    }
+  }
+  const func = object.getNameFunc();
+  console.log(func());
+  function assignHandler() {
+    let element = document.getElementById('btn');
+    const id = element.id; // 设置副本，解除循环引用
+    element.onclick= function () {
+      //
+      alert(id);
+    }
+    element = null; // 关闭对html元素的引用
+  }
+  assignHandler();
+</script>
+</body>
+</html>

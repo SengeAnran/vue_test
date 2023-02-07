@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>box</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      /*display: flex;*/
+      /*justify-content: space-around;*/
+      /*align-items: center;*/
+    }
+    .box{
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      width: 106px;
+      height: 106px;
+      border: 1px solid;
+    }
+    .btn {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border: 1px solid;
+      background-color: white;
+    }
+    .ltbtn {
+      top: -3px;
+      left: -3px;
+    }
+    .rtbtn {
+      top: -3px;
+      right: -3px;
+    }
+    .lbbtn {
+      bottom: -3px;
+      left: -3px;
+    }
+    .rbbtn {
+      bottom: -3px;
+      right: -3px;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <div class="btn ltbtn"></div>
+  <div class="btn rtbtn"></div>
+  <div class="btn lbbtn"></div>
+  <div class="btn rbbtn"></div>
+</div>
+<script>
+  // 获取元素
+  const box= document.querySelector('.box');
+  const ltbtn= document.querySelector('.ltbtn');
+  const rtbtn= document.querySelector('.rtbtn');
+  const lbbtn= document.querySelector('.lbbtn');
+  const rbbtn= document.querySelector('.rbbtn');
+  // 实现左上角拖动元素缩放
+  // 对按钮监听鼠标按下事件
+  ltbtn.addEventListener('mousedown', function (e) {
+    e.stopPropagation(); // 阻止点击按钮的事件冒泡，防止影响后续点击盒子拖动
+    // 对整个DOM监听鼠标移动事件，不采用监听按钮是因为鼠标可能因为按钮小移出按钮范围而影响实现效果
+    document.addEventListener('mousemove', boxLeft, false);
+    // 对整个DOM监听鼠标移动按钮按起事件
+    document.addEventListener('mouseup', function () {
+      // 移除对DOM的mousemove事件的监听
+      document.removeEventListener('mousemove', boxLeft, false);
+    })
+  });
+  lbbtn.addEventListener('mousedown', function (e) {
+    e.stopPropagation();
+    document.addEventListener('mousemove', boxLeftBottom, false);
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', boxLeftBottom, false)
+    })
+  });
+  rtbtn.addEventListener('mousedown', function (e) {
+    e.stopPropagation();
+    document.addEventListener('mousemove', boxRightrTop, false);
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', boxRightrTop, false)
+    })
+  });
+  rbbtn.addEventListener('mousedown', function (e) {
+    e.stopPropagation();
+    document.addEventListener('mousemove', boxRightBottom, false);
+    document.addEventListener('mouseup', function () {
+      // console.log('mouseup');
+      document.removeEventListener('mousemove', boxRightBottom, false)
+    })
+  });
+  // 拖拽盒子移动
+  box.addEventListener('mousedown', function (e) {
+    /// (disX, disY) 点击时鼠标相对于盒子左上角的位置
+    let disX = e.pageX - box.offsetLeft;
+    let disY = e.pageY - box.offsetTop;
+    function boxMove(e) { // 鼠标点击移动时
+      // 鼠标移动时(x,y)box 左上角应该所在的位置
+      let x,y;
+      x = e.pageX - disX;
+      y = e.pageY - disY;
+      box.style.left = x + 'px';
+      box.style.top = y + 'px';
+    }
+    document.addEventListener('mousemove', boxMove, false);
+    document.addEventListener('mouseup', function () {
+      document.removeEventListener('mousemove', boxMove, false)
+    })
+  })
+  function boxLeft(e) {
+    const boxWidth = box.offsetWidth;
+    const boxHeight = box.offsetHeight;
+    const boxOffsetLeft = box.offsetLeft;
+    const boxOffsetTop = box.offsetTop;
+    let distanceX = boxOffsetLeft - e.pageX; // x方向移动距离
+    let distanceY = boxOffsetTop - e.pageY;// Y方向移动距离
+    let newBoxWidth = boxWidth +  distanceX;
+    let newBoxHeight = boxHeight + distanceY;
+    if (newBoxWidth < 5) { // 新盒子宽度不能小于5px
+      newBoxWidth = 5;
+      distanceX = 0;
+    }
+    if (newBoxHeight < 5) { // 新盒子长度不能小于5px
+      newBoxHeight = 5;
+      distanceY = 0;
+    }
+    // 控制盒子位置
+    box.style.left = boxOffsetLeft - distanceX + 'px';
+    box.style.top = boxOffsetTop - distanceY + 'px';
+    // 控制盒子缩放
+    box.style.width = newBoxWidth + 'px';
+    box.style.height = newBoxHeight + 'px';
+  }
+
+  function boxRightrTop(e) {
+    const boxWidth = box.offsetWidth;
+    const boxHeight = box.offsetHeight;
+    const boxOffsetLeft = box.offsetLeft;
+    const boxOffsetTop = box.offsetTop;
+    let distanceX = e.pageX - boxOffsetLeft - boxWidth ;
+    let distanceY = boxOffsetTop - e.pageY;
+    let newBoxWidth = boxWidth +  distanceX;
+    let newBoxHeight = boxHeight + distanceY;
+    if (newBoxWidth < 5) {
+      newBoxWidth = 5;
+      distanceX = 0;
+    }
+    if (newBoxHeight < 5) {
+      newBoxHeight = 5;
+      distanceY = 0;
+    }
+    box.style.top = boxOffsetTop - distanceY + 'px';
+    box.style.width = newBoxWidth + 'px';
+    box.style.height = newBoxHeight + 'px';
+  }
+
+  function boxLeftBottom(e) {
+    const boxWidth = box.offsetWidth;
+    const boxHeight = box.offsetHeight;
+    const boxOffsetLeft = box.offsetLeft;
+    const boxOffsetTop = box.offsetTop;
+    let distanceX = boxOffsetLeft - e.pageX;
+    let distanceY = e.pageY - (boxOffsetTop + boxHeight) ;
+    let newBoxWidth = boxWidth +  distanceX;
+    let newBoxHeight = boxHeight + distanceY;
+    if (newBoxWidth < 5) {
+      newBoxWidth = 5;
+      distanceX = 0;
+    }
+    if (newBoxHeight < 5) {
+      newBoxHeight = 5;
+      distanceY = 0;
+    }
+    box.style.left = boxOffsetLeft - distanceX + 'px';
+    box.style.width = newBoxWidth + 'px';
+    box.style.height = newBoxHeight + 'px';
+  }
+
+  function boxRightBottom(e) {
+    const boxWidth = box.offsetWidth;
+    const boxHeight = box.offsetHeight;
+    const boxOffsetLeft = box.offsetLeft;
+    const boxOffsetTop = box.offsetTop;
+    let distanceX = e.pageX - boxOffsetLeft - boxWidth ;
+    let distanceY = e.pageY - (boxOffsetTop + boxHeight) ;
+    let newBoxWidth = boxWidth +  distanceX;
+    let newBoxHeight = boxHeight + distanceY;
+    if (newBoxWidth < 5) {
+      newBoxWidth = 5;
+      distanceX = 0;
+    }
+    if (newBoxHeight < 5) {
+      newBoxHeight = 5;
+      distanceY = 0;
+    }
+    box.style.width = newBoxWidth + 'px';
+    box.style.height = newBoxHeight + 'px';
+  }
+
+  console.log(typeof boxRightBottom);
+  console.log(typeof [1,2]);
+
+</script>
+</body>
+</html>

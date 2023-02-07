@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    .dd {
+      color: rgba(59, 120, 242, 0.02);
+    }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="height: 350px">
+<!--  所有互联网的SVG滤镜定义在<defs>元素中,defs定义短并含有特殊元素（如滤镜）定义-->
+  <defs>
+<!--    filter定义SVG滤镜, <filter>标签使用必需的id属性来定义向图形应用哪个滤镜-->
+      <filter id="f1" x0="10" y0="10">
+<!--      <feGaussianBlur>元素定义模糊效果, in="SourceGraphic"这个部分定义了由整个图像创建效果, stdDeviation属性定义模糊量-->
+<!--      <feGaussianBlur in="SourceGraphic" stdDeviation="65" />-->
+<!--      <feOffset>元素是用于创建阴影效果-->
+<!--      <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0"></feOffset>-->
+<!--      <feGaussianBlur result="blurOut"  in="offOut" stdDeviation="10" />-->
+<!--&lt;!&ndash;      然后混合偏移图像顶部（含<feBlend>）&ndash;&gt;-->
+<!--      <feBlend in="SourceGraphic" in2="blurOut" mode="normal"></feBlend>-->
+      <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                     values="0 0 0 0 0
+              1 1 1 1 0
+              0 0 0 0 0
+              0 0 0 1 0" />
+<!--     type   matrix | saturate | hueRotate | luminanceToAlpha-->
+<!--        <feFlood flood-color="skyblue" ></feFlood>-->
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="6" />
+<!--      feBlend滤镜把两个对象组合在一起，使它们受特定的混合模式控制。这类似于图像编辑软件中混合两个图层。该模式由属性mode (en-US)定义。-->
+<!--      in 属性标识输入的原语。SourceGraphic 源图形-->
+<!--      filter内第一哥元素默认SourceGraphic，否则默认最近的result值的原语-->
+<!--      SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | FillPaint | StrokePaint |-->
+<!--      SourceGraphic：该关键词表示图形元素自身将作为<filter>原语的原始输入。-->
+<!--      SourceAlpha：该关键词表示图形元素自身将作为<filter>原语的原始输入。SourceAlpha 只使用元素的透明度。-->
+<!--      BackgroundImage：该关键词表示 filter 元素当前底下的区域的图形快照将被调用。-->
+<!--      BackgroundAlpha：该关键词表示图形元素自身将作为<filter>原语的原始输入。SourceAlpha 只使用元素的透明度。-->
+<!--      FillPaint：该关键词表示图形元素自身将作为<filter>原语的原始输入。SourceAlpha 只使用元素的透明度。-->
+<!--      StrokePaint：该关键词表示图形元素自身将作为<filter>原语的原始输入。SourceAlpha 只使用元素的透明度。-->
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+<!--      mode 用于描述当元素重叠时，颜色应当如何呈现-->
+<!--      normal 最终颜色永远是顶层颜色，无论底层颜色是什么。 其效果类似于两张不透明的纸重叠（overlapping）在一起。-->
+<!--      <feComponentTransfer in="SourceAlpha">-->
+<!--        <feFuncA type="table" tableValues="1 0" />-->
+<!--      </feComponentTransfer>-->
+<!--      <feGaussianBlur stdDeviation="4" />-->
+<!--      <feOffset dx="0" dy="0" result="offsetblur" />-->
+<!--      <feFlood floodColor="#7059ef" floodOpacity="1" result="color" />-->
+<!--      <feComposite in2="offsetblur" operator="in" />-->
+<!--      <feComposite in2="SourceAlpha" operator="in" />-->
+<!--      <feMerge>-->
+<!--        <feMergeNode in="SourceGraphic" />-->
+<!--        <feMergeNode />-->
+<!--      </feMerge>-->
+
+    </filter>
+    <filter id="dropShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="13" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                     values="
+              0 0 0 1 0
+              0 0 1 1 0
+              1 1 1 1 1
+              0 0 0 1 0" />
+      <feOffset in="matrixOut" dx="0" dy="0" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="20" y="20" width="200" height="200" fill="red" stroke="blue" stroke-width="3" filter="url(#dropShadow)"></rect>
+</svg>
+<script>
+  console.log(parseInt('11111',2))
+</script>
+</body>
+</html>
