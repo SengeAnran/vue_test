@@ -49,6 +49,10 @@
       <div class="box"></div>
     </div>
     <top-a-title/>
+    <functional :number="120"><li>sss</li></functional>
+    <a-title-functional :level="2">What you name?</a-title-functional>
+<!--    过滤器-->
+    <base-filter/>
 
   </div>
 </template>
@@ -57,9 +61,10 @@
 import List from './components/Render/List';
 import RenderInput from './components/Render/RenderInput';
 import TopATitle from './components/Render/TopATitle';
+import Functional from './components/Render/Functional';
 export default {
   name: 'App',
-  components: {TopATitle, RenderInput, List},
+  components: { Functional, TopATitle, RenderInput, List},
   data() {
     return {
       obj: {
