@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "webpack": "webpack --version",
+    "test": "jest"
   },
   "dependencies": {
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
@@ -19,11 +21,13 @@
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
+    "animate.css": "^4.1.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "jest": "^29.5.0",
     "vue-template-compiler": "^2.6.11",
-    "animate.css": "^4.1.1"
+    "webpack-cli": "^5.0.1"
   },
   "eslintConfig": {
     "root": true,
