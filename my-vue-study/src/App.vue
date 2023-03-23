@@ -1,70 +1,77 @@
 <template>
   <div id="app">
-    <base-title v-bind.sync="obj"></base-title>
-<!--    <base-title-->
-<!--      :title="title2"-->
-<!--      v-on:update:title="title2 = $event"-->
-<!--    ></base-title>-->
+<!--    <base-title v-bind.sync="obj"></base-title>-->
+<!--&lt;!&ndash;    <base-title&ndash;&gt;-->
+<!--&lt;!&ndash;      :title="title2"&ndash;&gt;-->
+<!--&lt;!&ndash;      v-on:update:title="title2 = $event"&ndash;&gt;-->
+<!--&lt;!&ndash;    ></base-title>&ndash;&gt;-->
 
-    <base-person-info
-      v-bind="personInfo"
-      :title="2334"
-      @removeLike="removeLike"
-    >
-      <template v-slot="{data}">
-       sss {{data}}
-      </template>
-      <template #content="scope">{{chengeScope(scope)}}内容内容</template>
-      <template v-slot:otherLike>其他爱好</template>
-    </base-person-info>
-    <base-input
-      ref="input"
-      v-on:focus="onFocus"
-      v-model="inputValue"
-      label="发士大夫"
-      :title="1323"
-    ></base-input>
-    <base-input
-      v-on:focus="onFocus"
-      :value="inputValue2"
-      @input="inputValue2 = $event"
-      label="发士大夫"
-      :title="1323"
-    ></base-input>
-    <button @click="fucus">fucus</button>
-    <br/>
-    <button @click="fristLevel = (fristLevel + 1)%6">改变标题等级+1</button>
-    <button @click="fristLevel = (fristLevel - 1)">改变标题等级-1</button>
-    <a-title :level="fristLevel">
-      <p :style="{color: 'red'}">{{fristLevel}}</p>
-    </a-title>
-    <a-title :level="2">What you name?</a-title>
-    <a-title :level="3">My name is ZhangSenYun</a-title>
-    <a-title :level="4">Are you?</a-title>
-    <a-title :level="5">I'am no name.</a-title>
-    <list :items="personInfo.like"></list>
-    <list></list>
-    <render-input v-model="renderValue"></render-input>
-    <div class="lang-box" @scroll.passive="onScroll">
-      <div class="box"></div>
-    </div>
-    <top-a-title/>
-    <functional :number="120"><li>sss</li></functional>
-    <a-title-functional :level="2">What you name?</a-title-functional>
-<!--    过滤器-->
-    <base-filter/>
-
+<!--    <base-person-info-->
+<!--      v-bind="personInfo"-->
+<!--      :title="2334"-->
+<!--      @removeLike="removeLike"-->
+<!--    >-->
+<!--      <template v-slot="{data}">-->
+<!--       sss {{data}}-->
+<!--      </template>-->
+<!--      <template #content="scope">{{chengeScope(scope)}}内容内容</template>-->
+<!--      <template v-slot:otherLike>其他爱好</template>-->
+<!--    </base-person-info>-->
+<!--    <base-input-->
+<!--      ref="input"-->
+<!--      v-on:focus="onFocus"-->
+<!--      v-model="inputValue"-->
+<!--      label="发士大夫"-->
+<!--      :title="1323"-->
+<!--    ></base-input>-->
+<!--    <base-input-->
+<!--      v-on:focus="onFocus"-->
+<!--      :value="inputValue2"-->
+<!--      @input="inputValue2 = $event"-->
+<!--      label="发士大夫"-->
+<!--      :title="1323"-->
+<!--    ></base-input>-->
+<!--    <button @click="fucus">fucus</button>-->
+<!--    <br/>-->
+<!--    <button @click="fristLevel = (fristLevel + 1)%6">改变标题等级+1</button>-->
+<!--    <button @click="fristLevel = (fristLevel - 1)">改变标题等级-1</button>-->
+<!--    <a-title :level="fristLevel">-->
+<!--      <p :style="{color: 'red'}">{{fristLevel}}</p>-->
+<!--    </a-title>-->
+<!--    <a-title :level="2">What you name?</a-title>-->
+<!--    <a-title :level="3">My name is ZhangSenYun</a-title>-->
+<!--    <a-title :level="4">Are you?</a-title>-->
+<!--    <a-title :level="5">I'am no name.</a-title>-->
+<!--    <list :items="personInfo.like"></list>-->
+<!--    <list></list>-->
+<!--    <render-input v-model="renderValue"></render-input>-->
+<!--    <div class="lang-box" @scroll.passive="onScroll">-->
+<!--      <div class="box"></div>-->
+<!--    </div>-->
+<!--    <top-a-title/>-->
+<!--    <functional :number="120"><li>sss</li></functional>-->
+<!--    <a-title-functional :level="2">What you name?</a-title-functional>-->
+<!--&lt;!&ndash;    过滤器&ndash;&gt;-->
+<!--    <base-filter/>-->
+    <base-cascader/>
+    <el-button>
+      <router-link to="/">首页</router-link>
+    </el-button>
+    <el-button>
+      <router-link to="/about">about页面</router-link>
+    </el-button>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import List from './components/Render/List';
-import RenderInput from './components/Render/RenderInput';
-import TopATitle from './components/Render/TopATitle';
-import Functional from './components/Render/Functional';
+// import List from './components/Render/List';
+// import RenderInput from './components/Render/RenderInput';
+// import TopATitle from './components/Render/TopATitle';
+// import Functional from './components/Render/Functional';
 export default {
   name: 'App',
-  components: { Functional, TopATitle, RenderInput, List},
+  // components: { Functional, TopATitle, RenderInput, List},
   data() {
     return {
       obj: {
