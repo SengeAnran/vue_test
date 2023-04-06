@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /**{*/
+    /*  padding: 0;*/
+    /*  margin: 0;*/
+    /*  border: 0;*/
+    /*}*/
+    img {
+      width: 300px;
+      height: 300px;
+      color: rgba(255, 192, 203, 0.99);
+    }
+  </style>
+</head>
+<body>
+<section style="margin-left: 10px">
+<!--  <svg  width="800" height="120">-->
+<!--    <rect x="20" y="10" width="100" height="100" fill="pink" stroke-width="30" stroke="blue" />-->
+<!--  </svg>-->
+<!--  <svg width="400" height="180">-->
+<!--    <rect x="50" y="20" width="150"-->
+<!--          height="150" fill="blue"-->
+<!--          stroke="tomato" stroke-width="5"-->
+<!--          fill-opacity="0.1" stroke-opacity="0.9"-->
+<!--          rx="25%" ry="40"-->
+<!--    />-->
+
+<!--  </svg>-->
+<!--  <br>-->
+<!--  <svg width="400" height="200">-->
+<!--    <circle cx="110" cy="80" r="70" fill="pink" stroke-width="5" stroke="tomato" />-->
+<!--  </svg>-->
+<!--  <br>-->
+<!--  <svg width="400" height="200">-->
+<!--    <ellipse cx="110" cy="80" rx="70"  ry="30" fill="pink" stroke-width="5" stroke="tomato"/>-->
+<!--  </svg>-->
+<!--  <br>-->
+<!--  <svg width="500" height="150">-->
+<!--    <ellipse cx="240" cy="100" rx="220" ry="30" fill="purple"/>-->
+<!--    <ellipse cx="220" cy="70" rx="190" ry="20" fill="lime"/>-->
+<!--    <ellipse cx="210" cy="45" rx="170" ry="15" fill="yellow"/>-->
+<!--  </svg>-->
+<!--  <br>-->
+<!--  <svg width="500" height="150">-->
+<!--    <ellipse cx="240" cy="100" rx="220" ry="30" fill="purple"/>-->
+<!--    <ellipse cx="240" cy="100" rx="190" ry="20" fill="white"/>-->
+<!--  </svg>-->
+<!--  <svg xmlns:xlink="http://www.w3.org/1999/xhtml" width="200" height="90">-->
+<!--    <a xlink:href="./text2.html" target="_blank">-->
+<!--      <text x="10" y="20" fill="red">-->
+<!--        Several lines-->
+<!--        <tspan x="10" y="45">First line</tspan>-->
+<!--        <tspan x="10" y="70">Second line</tspan>-->
+<!--      </text>-->
+<!--    </a>-->
+<!--  </svg>-->
+<!--  &lt;!&ndash;path&ndash;&gt;-->
+<!--  <br>-->
+<!--  <svg width="400" height="250">-->
+<!--    <path d="M150 0 L75 200 L225 200" />-->
+<!--  </svg>-->
+<!--  <svg width="500" height="450">-->
+<!--    <path d="M100 350 l150 -300 l150 300" fill="none" stroke-width="3" stroke="red"/>-->
+<!--    <path d="M 175 200 l150 0" stroke="green" stroke-width="3" fill="none"/>-->
+<!--    <path d="M100 350 q150 -300 300 0" fill="none" stroke="blue" stroke-width="3" />-->
+<!--    <g fill="black">-->
+<!--      <circle r="3" cx="100" cy="350"/>-->
+<!--      <circle r="3" cx="250" cy="50"/>-->
+<!--      <circle r="3" cx="400" cy="350"/>-->
+<!--    </g>-->
+<!--    <g font-size="38" fill="black" text-anchor="middle">-->
+<!--      <text x="100" y="350" dx="-30">A</text>-->
+<!--      <text x="250" y="50" dx="-18">B</text>-->
+<!--      <text x="400" y="350" dx="30">C</text>-->
+<!--    </g>-->
+<!--  </svg>-->
+<!--  <br>-->
+<!--  <svg width="300" height="80">-->
+<!--    <g fill="none">-->
+<!--      <path stroke="red" stroke-width="2" d="M5 20 l215 0"/>-->
+<!--      <path stroke="black" stroke-width="4" d="M5 40 l215 0"/>-->
+<!--      <path stroke="green" stroke-width="6" d="M5 60 l215 0"/>-->
+<!--    </g>-->
+<!--  </svg>-->
+<!--  <svg width="300" height="80">-->
+<!--    <g fill="none" stroke="black" stroke-width="6">-->
+<!--      <path stroke-linecap="butt" d="M5 20 l215 0"/>-->
+<!--      <path stroke-linecap="round" d="M5 40 l215 0"/>-->
+<!--      <path stroke-linecap="square" d="M5 60 l215 0"/>-->
+<!--    </g>-->
+<!--  </svg>-->
+<!--  <svg width="300" height="80">-->
+<!--    <g fill="none" stroke="black" stroke-width="3">-->
+<!--      <path stroke-dasharray="5,5" d="M5 20 l215 0"/>-->
+<!--      <path stroke-dasharray="10,10" d="M5 40 l215 0"/>-->
+<!--      <path stroke-dasharray="20,10,5,5,5,10" d="M5 60 l215 0"/>-->
+<!--    </g>-->
+<!--  </svg>-->
+<!--  <br>-->
+</section>
+
+<!--<svg width="500" height="210">-->
+<!--&lt;!&ndash;  <line x1="20" y1="20" x2="150" y2="200" stroke="red" stroke-width="3"/>&ndash;&gt;-->
+<!--&lt;!&ndash;  <polygon points="200,20 250,190 160,210" fill="lime" stroke="purple" stroke-width="2" />&ndash;&gt;-->
+<!--&lt;!&ndash;  <polyline points="200,20 250,190 160,210" fill="none" stroke="black" stroke-width="2"/>&ndash;&gt;-->
+<!--  <rect x="50" y="30" width="200" height="50" fill="pink" fill-opacity="0.4" stroke="blue" stroke-width="3" rx="5" />-->
+<!--  <text x="150" y="60" font-size="20" text-anchor="middle" transform="rotate(30 150,60)">张森云</text>-->
+<!--</svg>-->
+<!--<br>-->
+
+<svg>
+  <defs>
+    <filter x="0" y="0" id="f1">
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+  </defs>
+  <rect width="90" height="90"
+        stroke="green" stroke-width="3"
+        fill="yellow" filter="url(#f1)"
+  ></rect>
+</svg>
+<!--阴影-->
+<svg>
+  <defs>
+    <filter x="0" y="0" id="f2" width="200" height="200">
+<!-- 定义滤镜的起始位置 xy       定义滤镜的宽高属性width="200" height="200"-->
+      <feOffset dx="20" dy="20" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10"/>
+      <feBlend in="SourceGraphic"  />
+<!--      feBlend实现偏移的图像上混合原始图像-->
+    </filter>
+  </defs>
+  <rect width="90" height="90"
+        stroke="green" stroke-width="3"
+        fill="yellow" filter="url(#f2)"
+  ></rect>
+</svg>
+<br>
+<!--渐变-->
+<svg width="400" height="150">
+  <defs>
+    <linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="grad1">
+      <stop offset="0%" stop-color="rgb(255,255,0)"  />
+      <stop offset="50%" stop-color="rgb(255,0,255)"  />
+      <stop offset="100%" stop-color="rgb(255,0,0)"  />
+<!--      <stop offset="0%" stop-color="rgb(255,255,0)"  />-->
+    </linearGradient>
+    <radialGradient id="grad2" cx="30%" cy="30%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="rgb(255,255,0)"  />
+      <stop offset="50%" stop-color="rgb(255,0,255)"  />
+      <stop offset="100%" stop-color="rgb(255,0,0)"  />
+    </radialGradient>
+  </defs>
+  <ellipse cx="200" cy="70" rx="80" ry="50" fill="url(#grad2)"/>
+  <text fill="#fff" font-size="45" x="150" y="80">SVG</text>
+</svg>
+</body>
+</html>

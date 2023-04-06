@@ -1,6 +1,10 @@
 export const routes = [
   {
     path: '/',
+    redirect: '/home',
+  },
+  {
+    path: '/home',
     name: '首页',
     component: () => import('@/pages/home.vue'),
   },
