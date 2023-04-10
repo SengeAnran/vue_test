@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<svg width="400" height="400">
+			<rect x="50" y="50" width="250" height="150" class="rect"></rect>
+		</svg>
+		
+		<button>放大矩形</button>
+		<script type="text/javascript">
+			var btn = document.querySelector("button")
+			//
+			
+			btn.onclick = function(){
+				var svgRect = document.querySelector("rect")
+				console.log([svgRect])
+				svgRect.setAttribute("width","350")
+				svgRect.setAttribute("height","250")
+				svgRect.style.fill = "orangered"
+				//svgRect.setAttribute("x","200")
+				var sudu = 2;
+				var weizhi = 50;
+				setInterval(function(){
+					weizhi = weizhi + sudu;
+					svgRect.setAttribute("x",weizhi)
+				},10)
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.miqi{
+				fill: orange;
+				transition: all 2s;
+				transform: rotate(0deg);
+				transform-origin: center;
+			}
+			.miqi:hover{
+				fill: deepskyblue;
+				transform: rotate(360deg);
+				
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="1200" height="1000">
+			<defs>
+				<g id="miqi" class="miqi">
+					<circle cx="100" cy="100" r="50"></circle>
+					<circle cx="500" cy="100" r="50"></circle>
+					<circle cx="300" cy="300" r="200"></circle>
+				</g>
+			</defs>
+			
+			
+			<use href="#miqi" x="500" y="0"></use>
+		</svg>
+	</body>
+</html>

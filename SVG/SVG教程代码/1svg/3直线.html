@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.line{
+				stroke: #00BFFF;
+				stroke-width: 5px;
+				transition:all 2s;
+				/* transform: rotate(45deg); */
+				transform-origin: center;
+				animation: xuanzhuan 2s linear infinite;
+			}
+			@keyframes xuanzhuan{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			.line:hover{
+				stroke: yellow;
+			}
+			.polyline{
+				stroke: deeppink;
+				stroke-width: 5px; 
+				fill: none;
+			}
+			.my-polyline {
+				fill: none;
+				stroke-width: 4;
+				stroke: blue;
+			}
+			.my-line {
+				stroke: pink;
+				stroke-width: 40px;
+				transition:all 2s;
+				/*transform-origin: center;*/
+				animation: linear 2s myxuanzhuan infinite ;
+				transform-origin: 150px 150px;
+
+			}
+			.my-line:hover {
+				stroke: yellow;
+			}
+			@keyframes myxuanzhuan {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+
+			}
+		</style>
+	</head>
+	<body>
+		<svg width = "400" height="400">
+			<line x1="50" y1="50" x2="350" y2="350"  class="line"></line>
+			<polyline points="50,100 50,300 350,300" class="polyline"></polyline>
+		</svg>
+		<br>
+	<svg width="400" height="300">
+		<line x1="50" y1="50" x2="250" y2="250" class="my-line"/>
+		<polyline points="50,50 50,250 250,250" class="my-polyline"/>
+	</svg>
+	</body>
+</html>

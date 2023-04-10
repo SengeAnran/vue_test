@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<iframe src="img/pao.svg" width="450" height="200" scrolling="no" style="border: none;"></iframe>
+		<button type="button">改变球的颜色</button>
+		<script type="text/javascript">
+			var iframe = document.querySelector("iframe")
+			
+			console.log([iframe])
+			iframe.onload = function(){
+				svgDoc = iframe.contentDocument;
+				console.log(svgDoc)
+				
+			}
+			
+			
+			var btn = document.querySelector("button")
+			btn.onclick = function(){
+				var qiu = svgDoc.querySelector("[p-id='9655']")
+				console.log(qiu.style.fill = "skyblue")
+			}
+		</script>
+	</body>
+</html>
