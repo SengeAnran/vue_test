@@ -7,9 +7,60 @@
     .dd {
       color: rgba(59, 120, 242, 0.02);
     }
+    .polyline {
+      cursor: pointer;
+      fill: none;
+      stroke: #00BFFF;
+      stroke-width: 10px;
+      transform-origin: center ;
+      animation: 2s ease  animation1 infinite;
+    }
+    /*.polyline:hover {*/
+    /*  stroke: pink;*/
+
+    /*}*/
+    @keyframes animation1 {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
+  <svg viewBox="0 0  100 100" width="100" height="100">
+    <image xlink:href="../SVG/战胜疫情.svg" width="50%" height="50%" />
+  </svg>
+  <br>
+  <svg width="500" height="500">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <circle fill="#bee9e8" cx="50" cy="50" r="35"/>
+      </pattern>
+    </defs>
+<!--    <circle fill="#bee9e8" cx="50" cy="50" r="35"/>-->
+    <rect x="0" y="0" width="100%" height="100%" fill="url(#dots)"/>
+  </svg>
+  <br>
+  <svg width="300" height="480">
+    <defs>
+      <g fill="none" id="myG">
+        <path stroke="red" d="M5 20 l215 0"/>
+        <path stroke="black" d="M5 40 l215 0"/>
+        <path stroke="green" d="M5 60 l215 0"/>
+      </g>
+    </defs>
+    <use href="#myG" x="100" y="100" />
+  </svg>
+  <br>
+  <svg width="400" height="300">
+    <polyline points="20,20 150,160 340,40" class="polyline"/>
+    <circle id="myCircle" r="10" cx="40" cy="40" fill="pink"/>
+    <use href="#myCircle" x="15" y="60" ></use>
+  </svg>
+  <br>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="height: 350px">
 <!--  所有互联网的SVG滤镜定义在<defs>元素中,defs定义短并含有特殊元素（如滤镜）定义-->
   <defs>
