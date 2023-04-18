@@ -60,6 +60,9 @@
     <el-button>
       <router-link to="/about">about页面</router-link>
     </el-button>
+    <el-button>
+      <router-link to="/echarts">echarts页面</router-link>
+    </el-button>
     <router-view/>
   </div>
 </template>

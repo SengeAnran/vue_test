@@ -21,4 +21,12 @@ export const routes = [
     },
     component: () => import('@/pages/user.vue'),
   },
+  {
+    path: '/echarts',
+    name: '图表',
+    meta: {
+      id: 14,
+    },
+    component: () => import('@/pages/Echart/index.vue'),
+  },
 ];
