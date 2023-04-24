@@ -64,6 +64,10 @@
       <router-link to="/echarts">echarts页面</router-link>
     </el-button>
     <router-view/>
+<!--    <button @click="personInfo.like[1] = 'ssss'">change</button>-->
+<!--    <div class="" v-for="(item, index) in personInfo.like" :key="index">-->
+<!--      {{item}}-->
+<!--    </div>-->
   </div>
 </template>
 

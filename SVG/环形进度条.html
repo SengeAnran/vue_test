@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .circle {
+        stroke: #888888;
+        stroke-width: 20px;
+        fill: none;
+      }
+      .progess {
+        fill: none;
+        stroke-width: 20px;
+        stroke-linecap: round;
+        /*animation: 2s linear infinite animationG;*/
+      }
+      .text{
+        font-size: 100px;
+        /*文本居中*/
+        text-anchor: middle;
+        dominant-baseline: middle;
+        /*animation: 2s linear infinite colorAnimation;*/
+      }
+      @keyframes colorAnimation {
+        0% {
+          fill: red;
+        }
+        100% {
+          fill: rgb(4,164,243);
+        }
+
+      }
+      @keyframes animationG {
+        0% {
+          stroke: red;
+          stroke-dasharray: 0, 10000;
+        }
+        100% {
+          stroke: rgb(4,164,243);
+          stroke-dasharray: 1000, 10000;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="400" height="400">
+      <defs>
+
+      </defs>
+<!--      设置底色圆环-->
+      <circle r="160" cx="50%" cy="50%" class="circle"/>
+<!--      设置进度条-->
+      <circle r="160"  cx="50%" cy="50%" class="progess" transform="rotate(-90,200,200)"/>
+      <text class="text" x="50%" y="50%" >0%</text>
+    </svg>
+    <script>
+      const text = document.querySelector('.text');
+      const progess = document.querySelector('.progess');
+      //  获取svg圆长度
+      const circleLength = Math.floor(2* Math.PI * progess.getAttribute('r'));
+      function rotateCircle(persent) {
+        //  环线长度
+        const circleCurLength = Math.floor(circleLength * persent/ 100);
+
+      //  颜色 红rgb（255，0，0）
+      //  蓝reb（0， 191， 255）
+        const red = 255 + parseInt(0-255 * persent / 100);
+        const green = parseInt(191 * persent / 100);
+        const blue = parseInt(255 * persent / 100);
+        const color = `rgb(${red},${green},${blue})`;
+        progess.setAttribute('stroke-dasharray', circleCurLength + ',10000');
+        progess.setAttribute('stroke', color);
+        text.setAttribute('fill', color);
+        text.innerHTML = persent + '%';
+      }
+      let num = 0;
+      setInterval(()=> {
+        rotateCircle(num++%100);
+      }, 30)
+    </script>
+  </body>
+</html>

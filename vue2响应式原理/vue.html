@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="updateMessage">add</button>
+      <button @click="someObj.age++">+</button>
+      <p>我的名字{{name}}</p>
+      <p>我的名字{{someObj.age}}</p>
+      <p>我的名字{{someObj.b}}</p>
+      <p>我的名字{{someObj.c}}</p>
+<!--      <p>我的名字{{age}}</p>-->
+      <p>我的爱好:<span v-for="(item,index) in items" :key="index">{{item}},</span></p>
+      <span>{{items[1]}}</span>
+      <p ref="message">{{message}}</p>
+    </div>
+    <script src="vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        name: '张森云',
+        someObj: {
+          a: 2,
+        },
+        items: ['游泳', '滑冰'],
+        message: '未更新',
+      },
+      mounted()  {
+        // this.addProperty();
+      },
+      methods:{
+        /**
+         * 嵌套添加响应式属性
+         */
+        addProperty() {
+          console.log(this);
+          // 单属性
+          // this.someObj.age= 23; // 增加的不是响应式数据
+          this.$set(this.someObj, 'age', 23);
+        //  多属性
+          this.someObj = Object.assign({}, this.someObj, {b: 1, c:3});
+        },
+        changeArrValue() {
+          // this.items[1] = '可乐'; // 非响应式
+          // this.$set(this.items,1, '可乐');
+          this.items.splice(1,1, '可乐');
+        },
+        updateMessage() {
+          this.message = '已更新';
+          console.log(this.$refs.message.textContent);
+          this.$nextTick(() => {
+            console.log(this.$refs.message.textContent);
+          })
+        }
+      }
+    })
+  </script>
+  </body>
+</html>
