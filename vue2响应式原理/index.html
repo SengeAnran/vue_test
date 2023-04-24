@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="zsy">张森云</button>
+<!--<button id="arr0">张森云</button>-->
+<button id="hq">黄倩</button>
+<p>我的名字：<span id="myName"></span></p>
+<p>年龄：<span id="age"></span></p>
+<p>爱好：<span id="like"></span></p>
+<p>身高：<span id="height"></span></p>
+<p>likes:<span id="arr0"></span></p>
+<p>likes:<span id="arr1"></span></p>
+<p>likes:<span id="arr2"></span></p>
+<script>
+  // 对象的响应式
+  const data = {
+    myName: '张雪',
+    age: 24,
+    like: 'eat',
+    height: 172,
+  }
+  const arr = ['唱歌', '骑自行车', '游泳'];
+  // vm 响应式对象
+  const vm = {};
+
+
+  /**
+   * 对对象或数组进行响应式注册操作
+   * @param obj
+   */
+  function initData(obj) {
+    console.log(obj instanceof Array);
+    if (obj instanceof Array) {
+      vm[obj] = {};
+      obj.forEach((i, index) => {
+        console.log(i);
+        Object.defineProperty(vm[obj],index, {
+          get() {
+            return obj[index];
+          },
+          set(v) {
+            if (obj[index] === v)  return;
+            obj[index] = v;
+            document.querySelectorAll(`#arr${index}`).forEach(j => {
+              j.textContent = obj[index];
+            });
+          }
+        } );
+        document.querySelectorAll(`#arr${index}`).forEach(j => {
+          j.textContent = i;
+        });
+      })
+    }
+    if (obj instanceof Object) {
+      //遍历对象的属性
+      Object.keys(data).map(i => {
+        // 把每个属性转换成getter/setter ，对用户来说是不可见的 内部能让vue追踪依赖
+        // ES5 之后才支持 Object.defineProperty 所以导致ie8以及更低版本不支持
+        Object.defineProperty(vm, i, {
+          get() {
+            return obj[i];
+          },
+          set(v) {
+            if (obj[i] === v) return;
+            obj[i] = v;
+            // 被修改=》 通知变更
+            document.querySelectorAll(`#${i}`).forEach(j => {
+              j.textContent = v;
+            })
+          }
+        })
+        // 对数据进行初始化渲染
+        document.querySelectorAll(`#${i}`).forEach(j => {
+          j.textContent = obj[i];
+        });
+      });
+      return;
+    }
+
+
+  }
+  // document.onload = () => {
+  //   console.log('222');
+  //
+  // }
+  // initData(data);
+  initData(arr);
+
+  // Object.defineProperty(vm,'myName', {
+  //   get() {
+  //     return data.myName;
+  //   },
+  //   set(v) {
+  //     if (v === data.myName) return;
+  //     data.myName = v;
+  //     const myName = document.querySelector('#myName');
+  //     myName.textContent = data.myName;
+  //   }
+  // } );
+  const zsy = document.querySelector('#zsy');
+  const arr0 = document.querySelector('#arr0');
+  const hq = document.querySelector('#hq');
+  zsy.addEventListener('click', () => {
+    vm.myName = '张森云';
+  })
+  arr0.addEventListener('click', () => {
+    vm.arr[0] = '张森云';
+  })
+
+  hq.addEventListener('click', () => {
+    vm.myName = '黄倩';
+  })
+</script>
+</body>
+</html>
