@@ -1,0 +1,17 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "serve": "webpack serve --config webpack.config.js"
+  },
+  "author": "zhangsenyun",
+  "dependencies": {},
+  "devDependencies": {
+    "@webpack-cli/serve": "^2.0.2",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
