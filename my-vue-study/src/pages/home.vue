@@ -8,43 +8,22 @@
 // import defineReactive from './defineReactive';
 // import Observer from './Observer';
 import observe from './observe';
+import './array';
 export default {
   name: 'home',
   mounted() {
-    // const obj = {
-    //   a: {
-    //     m: {
-    //       n: 5
-    //     }
-    //   },
-    //   b: 4,
-    // };
-    // const obj2 = {
-    //   a: {
-    //     m: {
-    //       n: 5
-    //     }
-    //   },
-    //   b: 4,
-    // };
-    // const aimObj = {
-    //   a: {
-    //     m: {
-    //       n: 5,
-    //       __ob__: {},
-    //     },
-    //     __ob__: {},
-    //   },
-    //   b: 4,
-    //   __ob__: {}
-    // };
+    const obj = {
+      a: 5,
+      b: 4,
+      g: [1, 2,3,4,5],
+    };
     // 创建observe函数，注意函数的名字没有r
-    const arr = [1, 2,3,4,5];
-    observe(arr);
-    // observe(obj2);
+    observe(obj);
+    console.log(obj);
     console.log('sss');
-    arr.push(32)
-    console.log(arr);
+    obj.a = 7;
+    // obj.g.splice(2, 0, [32, 12]);
+    // console.log(obj.g);
     // function defineReactive(obj, key, val) {
     //   // 生成闭包 val的中间变量
     //   Object.defineProperty(obj,key, {
