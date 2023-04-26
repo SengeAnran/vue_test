@@ -1,6 +1,5 @@
 import observe from './observe';
 import Dep from './Dep';
-import Watcher from './Watcher';
 /**
  *通过闭包的方式设置对象的属性的值
  * @param obj 对象

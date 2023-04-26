@@ -9,11 +9,16 @@
 // import Observer from './Observer';
 import observe from './observe';
 import './array';
+import Watcher from './Watcher';
 export default {
   name: 'home',
   mounted() {
     const obj = {
-      a: 5,
+      a: {
+        m: {
+          n:55,
+        }
+      },
       b: 4,
       g: [1, 2,3,4,5],
     };
@@ -21,7 +26,12 @@ export default {
     observe(obj);
     console.log(obj);
     console.log('sss');
-    obj.a = 7;
+    new Watcher(obj, 'a.m.n', (val) => {
+      console.log('XXX', val)
+    })
+    obj.a.m.n = 88;
+    obj.a.m.n = 435;
+    // console.log(obj)
     // obj.g.splice(2, 0, [32, 12]);
     // console.log(obj.g);
     // function defineReactive(obj, key, val) {
