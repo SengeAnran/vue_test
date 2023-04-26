@@ -13,3 +13,18 @@ export const def = function (obj,key, value, enumerable = false) {
     configurable: true,
   })
 }
+const str = 'a.b.c.d';
+
+/**
+ * 拆分字符串中的路径
+ * @param str
+ */
+export function parsePath(str) {
+  const segments = str.split('.');
+  console.log(segments);
+  return(obj) => {
+    for (let i = 0; i < segments.length; i++) {
+      obj = obj[segments[i]];
+    }
+  }
+}

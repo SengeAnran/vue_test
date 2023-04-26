@@ -1,5 +1,6 @@
 import observe from './observe';
 import Dep from './Dep';
+import Watcher from './Watcher';
 /**
  *通过闭包的方式设置对象的属性的值
  * @param obj 对象
@@ -22,6 +23,15 @@ function defineReactive(obj, key, val) {
     configurable: true,/*可被配置*/
     get() {
       console.log(`你试图访问${key}属性 ${val}`)
+      // 如果现在处于依赖收集阶段
+      if (Dep.target) { // 模版解析的时候会读取模版中的变量， 这时Dep.target才会有值
+        dep.depend();
+        if (childOb) { // ？？？？？
+          childOb.dep.depend();
+        }
+      }
+      // const watcher = new Watcher();
+      // dep.depend(watcher);
       return val;
     },
     set(v) {
