@@ -1,0 +1,829 @@
+html,
+body,
+#container {
+    left    : 0;
+    top     : 0;
+    width   : 100%;
+    height  : 100%;
+    margin  : 0;
+    padding : 0;
+    overflow: hidden;
+}
+
+.gis-loadImage {
+    left            : 0;
+    top             : 0;
+    filter          : alpha(opacity=40);
+    -moz-opacity    : .2;
+    opacity         : 0.2;
+    position        : absolute;
+    width           : 100%;
+    height          : 100%;
+    background-color: #e0e0e0;
+    z-index         : 9;
+    text-align      : center;
+}
+
+.gis-loadImage span {
+    position: absolute;
+    left    : 45%;
+    top     : 45%;
+    z-index : 10;
+    display : block;
+}
+
+.gis-popup {
+    position             : absolute;
+    padding              : 6px;
+    border-radius        : 10px;
+    border               : 1px solid #cccccc;
+    bottom               : 6px;
+    left                 : -30px;
+    min-width            : 120px;
+    /*background           : url("../images/bg-popup.png") repeat;*/
+    filter               : alpha(opacity=80);
+    -moz-opacity         : 0.8;
+    -khtml-opacity       : 0.8;
+    opacity              : 0.8;
+    background-attachment: fixed;
+}
+
+.gis-popup:after,
+.gis-popup:before {
+    top           : 100%;
+    border        : solid transparent;
+    content       : " ";
+    height        : 0;
+    width         : 0;
+    position      : absolute;
+    pointer-events: none;
+}
+
+.gis-popup:after {
+    border-top-color: white;
+    border-width    : 10px;
+    left            : 24px;
+    margin-left     : -10px;
+}
+
+.gis-popup:before {
+    border-top-color: #cccccc;
+    border-width    : 11px;
+    left            : 24px;
+    margin-left     : -11px;
+}
+
+.gis-popup-content {
+    font : normal 10.5pt 微软雅黑;
+    color: white;
+}
+
+.gis-popup-title {
+    font   : bold 10.5pt 微软雅黑;
+    padding: 2px 0px 1px 10px;
+}
+
+.gis-popup-closer {
+    position       : absolute;
+    top            : 0;
+    right          : 0;
+    padding        : 4px 4px 0 0;
+    border         : none;
+    text-align     : center;
+    width          : 18px;
+    height         : 14px;
+    font           : 16px/14px Tahoma, Verdana, sans-serif;
+    font-weight    : normal;
+    color          : #c3c3c3;
+    text-decoration: none !important;
+    font-weight    : bold;
+    background     : transparent;
+}
+
+.gis-popup-closer :hover {
+    text-decoration: none !important;
+}
+
+.gis-dialog {
+    position        : absolute;
+    top             : 250px;
+    left            : 450px;
+    border          : 1px solid #ddd;
+    box-shadow      : none;
+    background-color: rgba(35, 81, 131, 0.8) !important;
+    border-radius   : 10px !important;
+    overflow        : hidden;
+    min-width       : 200px;
+    max-width       : 500px;
+}
+
+.gis-dialog .title {
+    width           : 100%;
+    height          : 25px;
+    line-height     : 25px;
+    font-size       : 12pt;
+    font-weight     : bold;
+    border-bottom   : 1px outset #bcbcbc;
+    color           : white;
+    text-indent     : 10px;
+    background-color: rgba(68, 72, 85, 0.8);
+    cursor          : move;
+}
+
+.gis-dialog .close {
+    position   : absolute;
+    top        : 0;
+    right      : 6px;
+    padding    : 0;
+    font-size  : 24px;
+    line-height: 1;
+    border     : 0;
+    background : transparent;
+    color      : #aaa;
+    cursor     : pointer;
+}
+
+.gis-dialog .close:hover {
+    color: #333;
+}
+
+.gis-dialog .cont {
+    text-align      : center;
+    padding         : 15px;
+    font-size       : 10pt;
+    font-family     : 微软雅黑, Arial;
+    min-height      : 60px;
+    background-color: rgba(57, 61, 73, 0.8);
+    color           : white;
+}
+
+.gis-dialog .cont .diacont {
+    text-align    : left;
+    vertical-align: middle;
+    width         : 100%;
+    height        : 100%;
+}
+
+.gis-dialog .footer {
+    width           : 100%;
+    text-align      : center;
+    padding-bottom  : 10px;
+    background-color: rgba(0, 64, 64, 0.8);
+}
+
+.gis-widget-content {
+    font-family: 微软雅黑;
+    color      : white;
+}
+
+.gis-widget-content,
+.gis-widget-row {
+    width  : 100%;
+    display: block;
+}
+
+.gis-widget-row {
+    padding: 5px;
+}
+
+.gis-widget-row div {
+    display: block;
+    float  : left;
+    margin : 0;
+}
+
+.gis-widget-row .mcirLabel {
+    width      : 35%;
+    text-align : right;
+    font-weight: 600;
+}
+
+.gis-widget-row .mcirText {
+    width     : 60%;
+    text-align: left;
+}
+
+.button_ {
+    display              : inline-block;
+    outline              : none;
+    cursor               : pointer;
+    text-align           : center;
+    text-decoration      : none;
+    font                 : 16px/100% 'Microsoft yahei', Arial, Helvetica, sans-serif;
+    padding              : .5em 2em .55em;
+    text-shadow          : 0 1px 1px rgba(0, 0, 0, .3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius   : .5em;
+    border-radius        : .5em;
+    -webkit-box-shadow   : 0 1px 2px rgba(0, 0, 0, .2);
+    -moz-box-shadow      : 0 1px 2px rgba(0, 0, 0, .2);
+    box-shadow           : 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.button_:hover {
+    text-decoration: none;
+}
+
+.button_:active {
+    position: relative;
+    top     : 1px;
+}
+
+.white_ {
+    color     : #606060;
+    border    : solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top, #fff, #ededed);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+
+.white_:hover {
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top, #fff, #dcdcdc);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+
+.white_:active {
+    color     : #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top, #ededed, #fff);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.orange_ {
+    color     : #fef4e9;
+    border    : solid 1px #da7c0c;
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+    background: -moz-linear-gradient(top, #faa51a, #f47a20);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+
+.orange_:hover {
+    background: #f47c20;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+}
+
+.orange_:active {
+    color     : #fcd3a5;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+}
+
+.blue_ {
+    color     : #d9eef7;
+    border    : solid 1px #0076a3;
+    background: #0095cd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+    background: -moz-linear-gradient(top, #00adee, #0078a5);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+}
+
+.blue_:hover {
+    background: #007ead;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+    background: -moz-linear-gradient(top, #0095cc, #00678e);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endColorstr='#00678e');
+}
+
+.blue_:active {
+    color     : #80bed6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+    background: -moz-linear-gradient(top, #0078a5, #00adee);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5', endColorstr='#00adee');
+}
+
+.green_ {
+    color     : #e8f0de;
+    border    : solid 1px #538312;
+    background: #64991e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+    background: -moz-linear-gradient(top, #7db72f, #4e7d0e);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+
+.green_:hover {
+    background: #538018;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+    background: -moz-linear-gradient(top, #6b9d28, #436b0c);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+
+.green_:active {
+    color     : #a9c08c;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+    background: -moz-linear-gradient(top, #4e7d0e, #7db72f);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+
+.medium_ {
+    font-size: 10pt;
+    padding  : .6em 1.8em .68em;
+}
+
+.small_ {
+    font-size: 9pt;
+    padding  : .24em .8em .3em;
+}
+
+.bigrounded {
+    -webkit-border-radius: 2em;
+    -moz-border-radius   : 2em;
+    border-radius        : 2em;
+}
+
+.ztree li span.button.iconVideo {
+    background-image: none;
+    display         : inline;
+}
+
+.ztree li span.button.iconVideo::before {
+    content    : "\f03d";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #478FCA;
+}
+
+.ztree li span.button.resCamerasIcon_ico_docu,
+.ztree li span.button.resCamerasIcon_ico_open,
+.ztree li span.button.resCamerasIcon_ico_close {
+    background-image: none;
+}
+
+.ztree li span.button.resCamerasIcon_ico_open::before,
+.ztree li span.button.resCamerasIcon_ico_close::before,
+.ztree li span.button.resCamerasIcon_ico_docu::before {
+    content     : "\f109";
+    font-size   : 1.5em;
+    font-family : FontAwesome;
+    padding-top : 9px;
+    padding-left: 1px;
+    display     : inline-block;
+    color       : #478FCA;
+}
+
+.ztree li span.button.resCameraIcon_ico_docu,
+.ztree li span.button.resCameraIcon_ico_open,
+.ztree li span.button.resCameraIcon_ico_close {
+    background-image: none;
+}
+
+.ztree li span.button.resCameraIcon_ico_open::before,
+.ztree li span.button.resCameraIcon_ico_close::before,
+.ztree li span.button.resCameraIcon_ico_docu::before {
+    content     : "\f03d";
+    font-size   : 1.5em;
+    font-family : FontAwesome;
+    padding-top : 9px;
+    padding-left: 1px;
+    display     : inline-block;
+    color       : #478FCA;
+}
+
+
+
+.ztree li span.button.iconShareVideo {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconShareVideo::before {
+    content    : "\f1e0";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #478FCA;
+}
+
+.ztree li span.button.iconCall {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconCall::before {
+    content    : "\f130";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #478FCA;
+}
+
+.ztree li span.button.iconEye {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconEye::before {
+    content    : "\f06e";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #478FCA;
+}
+
+.ztree li span.button.iconEyeOff {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconEyeOff::before {
+    content    : "\f06e";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #ff0000;
+}
+
+
+.ztree li span.button.iconCallOff {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconCallOff::before {
+    content    : "\f011";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #f00;
+}
+
+.ztree li span.button.iconMsg {
+    background-image: none;
+    display         : inline;
+    padding-left    : 5px;
+}
+
+.ztree li span.button.iconMsg::before {
+    content    : "\f27a";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    padding    : 0px;
+    display    : inline;
+    color      : #478FCA;
+}
+
+.ztree li span.button.resUsersIcon_ico_docu,
+.ztree li span.button.resUsersIcon_ico_open,
+.ztree li span.button.resUsersIcon_ico_close {
+    background-image: none;
+}
+
+.ztree li span.button.resUsersIcon_ico_open::before,
+.ztree li span.button.resUsersIcon_ico_close::before,
+.ztree li span.button.resUsersIcon_ico_docu::before {
+    content     : "\f0c0";
+    font-size   : 1.3em;
+    font-family : FontAwesome;
+    padding-top : 9px;
+    padding-left: 2px;
+    display     : inline-block;
+    color       : #478FCA;
+}
+
+.ztree li span.button.resUserIcon_ico_docu,
+.ztree li span.button.resUserIcon_ico_open,
+.ztree li span.button.resUserIcon_ico_close {
+    background-image: none;
+}
+
+.ztree li span.button.resUserIcon_ico_open::before,
+.ztree li span.button.resUserIcon_ico_close::before,
+.ztree li span.button.resUserIcon_ico_docu::before {
+    content     : "\f007";
+    font-size   : 1.3em;
+    font-family : FontAwesome;
+    padding-top : 9px;
+    padding-left: 5px;
+    display     : inline-block;
+    color       : #478FCA;
+}
+
+
+.ztree li span.button.pIcon01_ico_docu,
+.ztree li span.button.pIcon01_ico_open,
+.ztree li span.button.pIcon01_ico_close {
+    background-image: none;
+    padding-left    : 0px;
+    padding-right   : 20px;
+}
+
+.ztree li span.button.pIcon01_ico_docu::before,
+.ztree li span.button.pIcon01_ico_open::before,
+.ztree li span.button.pIcon01_ico_close::before {
+    content    : "\f015";
+    font-size  : 1.5em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : #478FCA;
+}
+
+.ztree li span.button.pIcon02_ico_open,
+.ztree li span.button.pIcon02_ico_close {
+    background-image: none;
+    padding-left    : 0px;
+    padding-right   : 20px;
+}
+
+.ztree li span.button.pIcon02_ico_open::before,
+.ztree li span.button.pIcon02_ico_close::before {
+    content    : "\f0b1";
+    font-size  : 1.2em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : #478FCA;
+}
+
+.ztree li span.button.icon01_ico_docu,
+.ztree li span.button.onlineIcon_ico_docu,
+.ztree li span.button.offlineIcon_ico_docu,
+.ztree li span.button.timeoutlineIcon_ico_docu {
+    background-image: none;
+    padding-left    : 0px;
+    padding-right   : 15px;
+}
+
+.ztree li span.button.icon01_ico_docu::before {
+    content    : "\f183";
+    font-size  : 1.0em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : gray;
+}
+
+.ztree li span.button.onlineIcon_ico_docu::before {
+    content    : "\f183";
+    font-size  : 1.0em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : green;
+}
+
+.ztree li span.button.offlineIcon_ico_docu::before {
+    content    : "\f183";
+    font-size  : 1.0em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : red;
+}
+
+.ztree li span.button.timeoutlineIcon_ico_docu::before {
+    content    : "\f183";
+    font-size  : 1.0em;
+    font-family: FontAwesome;
+    display    : inline-block;
+    color      : yellow;
+}
+
+
+/*覆盖表格样式*/
+.skin-1 .table>tbody>tr>td,
+.skin-1 .table>tbody>tr>th,
+.skin-1 .table>tfoot>tr>td,
+.skin-1 .table>tfoot>tr>th,
+.skin-1 .table>thead>tr>td,
+.skin-1 .table>thead>tr>th {
+    padding: 8px 0px 8px 5px;
+}
+
+.skin-1 .table-hover>tbody>tr:hover,
+.skin-1 .table>tbody>tr.active>td,
+.skin-1 .table>tbody>tr.active>th,
+.skin-1 .table>tbody>tr>td.active,
+.skin-1 .table>tbody>tr>th.active,
+.skin-1 .table>tfoot>tr.active>td,
+.skin-1 .table>tfoot>tr.active>th,
+.skin-1 .table>tfoot>tr>td.active,
+.skin-1 .table>tfoot>tr>th.active,
+.skin-1 .table>thead>tr.active>td,
+.skin-1 .table>thead>tr.active>th,
+.skin-1 .table>thead>tr>td.active,
+.skin-1 .table>thead>tr>th.active {
+    background-color: black;
+}
+
+.skin-1 .table-striped>tbody>tr {
+    background-color: transparent;
+    color           : white;
+}
+
+.skin-1 .table.table-bordered thead:first-child>tr {
+    background-color: transparent;
+}
+
+.skin-1 .dataTables_wrapper :first-child.row {
+    display: none;
+}
+
+.skin-1 .col-xs-6 {
+    width: 100%;
+}
+
+.skin-1 .dataTables_wrapper :last-child.row {
+    padding-top     : 0px;
+    padding-bottom  : 0px;
+    background-color: transparent;
+    border-bottom   : none;
+    border-top      : none;
+}
+
+.skin-1 .pagination>li>a,
+.skin-1 .pager>li>a {
+    border-color    : white;
+    background-color: transparent;
+    padding         : 6px 10px;
+}
+
+.dataTable>thead>tr>th[class*=sorting_] {
+    color: #fff;
+}
+
+.dataTable>thead>tr>th[class*=sort]:hover {
+    color: #ffff80;
+}
+
+.sritgis-info-window3D {
+    position      : absolute;
+    display       : none;
+    user-select   : none;
+    /*禁止选中*/
+    pointer-events: none;
+    /*鼠标穿透*/
+    top           : 0;
+    left          : 0;
+    width         : 320px;
+    height        : 250px;
+    z-index       : 99999;
+}
+
+.sritgis-info-window3D .line {
+    position  : absolute;
+    left      : 0;
+    width     : 0;
+    height    : 100px;
+    bottom    : 0;
+    background: url("../images/info_line.png")
+}
+
+.sritgis-info-window3D .main {
+    overflow       : auto;
+    display        : none;
+    position       : absolute;
+    max-height     : 200px;
+    top            : auto;
+    left           : 50px;
+    right          : 0;
+    bottom         : 100px;
+    background     : url("../images/info_border.png") no-repeat;
+    background-size: 100% 100%;
+    color          : white;
+    padding        : 20px 5px 5px 20px;
+    font-size      : 14px;
+    user-select    : text;
+    pointer-events : auto;
+}
+
+.sritgis-info-window3D .gis-widget-row {
+    padding: 3px 0px 0px 0px;
+}
+
+.sritgis-info-window3D .title {
+    padding-left: 15px;
+}
+
+.sritgis-info-window3D .main::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width : 5px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0px;
+}
+
+.sritgis-info-window3D .main::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius     : 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background        : transparent;
+}
+
+.sritgis-info-window3D .main::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius     : 10px;
+    background        : transparent;
+}
+
+.sritgis-info-window3D .light {
+    position: absolute;
+    z-index : 2;
+    width   : 100%;
+    height  : 100%;
+}
+
+.sritgis-center-btns {
+    position  : absolute;
+    top       : 3%;
+    left      : 0;
+    right     : 0;
+    text-align: right;
+    height    : 50px;
+    margin-top: 0px;
+    margin-right: 50px;
+}
+
+.sritgis-center-btns .sritgis-btn {
+    background-color: #333;
+    color           : #fff;
+    border-radius   : 30px;
+    padding         : 0 20px;
+}
+
+.sritgis-btn {
+    text-decoration   : none;
+    outline           : none;
+    -webkit-appearance: none;
+    box-sizing        : border-box;
+    transition        : all 0.35s;
+    opacity           : 0.8
+}
+
+.sritgis-btn:hover {
+    opacity: 1;
+    filter : alpha(opacity=100);
+}
+
+.sritgis-btn {
+    display            : inline-block;
+    vertical-align     : middle;
+    height             : 38px;
+    line-height        : 38px;
+    padding            : 0 18px;
+    background-color   : #00b2ee;
+    color              : #fff;
+    white-space        : nowrap;
+    text-align         : center;
+    font-size          : 14px;
+    border             : none;
+    border-radius      : 2px;
+    cursor             : pointer;
+    -moz-user-select   : none;
+    -webkit-user-select: none;
+    -ms-user-select    : none;
+}
+
+.sritgis-btn:active {
+    opacity: 0.8;
+    filter : alpha(opacity=80);
+}
+
+.sritgis-btn+.sritgis-btn {
+    margin-left: 10px;
+}
+
+.sritgis-btn.sritgis-btn-sm {
+    height     : 28px;
+    line-height: 28px;
+    padding    : 0 10px;
+    font-size  : 12px;
+}
+
+.sritgis-btn.sritgis-btn-xs {
+    height     : 24px;
+    line-height: 24px;
+    padding    : 0 6px;
+    font-size  : 11px;
+}
+
+/*原始*/
+.sritgis-btn-primary {
+    border          : 1px solid #C9C9C9;
+    background-color: #fff;
+    color           : #555;
+}
+
+.sritgis-btn-primary:hover {
+    border-color: #ffff00;
+    color       : #fff
+}
+
+.sritgis-btn .sritgis-icon {
+    margin-right: 8px;
+    font-size   : 14px;
+}
+
+.sritgis-btn-xs .sritgis-icon {
+    margin-right: 4px;
+    font-size   : 12px;
+}

@@ -26,7 +26,7 @@ methodsNeedChange.forEach(methodName => {
     // console.log(arguments);
     //   3.恢复原来的方法
     //  函数直接使用（）执行，上下文为window， 所以不能直接调用备份的方法
-    const result = original.apply(this, arguments);
+    const result = original.apply(this, arguments); //apply方法必须将传给该函数的参数合并成一个数组作为自己的一个参数：
     // 把类数组对象变换为数组
     const args = [...arguments];
     // 6.把插入的新项也变成observe的
