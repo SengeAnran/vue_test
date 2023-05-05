@@ -1,32 +1,52 @@
 export const routes = [
   {
     path: '/',
+    component: () => import('@/layout/index.vue'),
     redirect: '/home',
+    children: [
+      {
+        path: 'home',
+        name: '首页',
+        components: {
+          default:() => import('@/pages/home.vue'),
+          nav:() => import('@/pages/nav.vue')
+        },
+      },
+      {
+        path: 'about',
+        name: '关于',
+        component: () => import('../pages/about.vue'),
+      },
+      {
+        path: 'user(/key)?/:id/:username',
+        name: '用户',
+        meta: {
+          id: 12,
+        },
+        component: () => import('@/pages/user.vue'),
+      },
+      {
+        path: 'echarts',
+        name: '图表',
+        meta: {
+          id: 14,
+        },
+        component: () => import('@/pages/Echart/index.vue'),
+      },
+      // {
+      //   path: '',
+      //   name: '空',
+      //   meta: {
+      //     id: 14,
+      //   },
+      //   component: () => import('@/pages/about.vue'),
+      // }
+    ]
   },
   {
-    path: '/home',
-    name: '首页',
-    component: () => import('@/pages/home.vue'),
+    path: '*',
+    name: '404',
+    component: () => import('@/pages/404.vue'),
   },
-  {
-    path: '/about',
-    name: '关于',
-    component: () => import('../pages/about.vue'),
-  },
-  {
-    path: '/user/:id/:username',
-    name: '用户',
-    meta: {
-      id: 12,
-    },
-    component: () => import('@/pages/user.vue'),
-  },
-  {
-    path: '/echarts',
-    name: '图表',
-    meta: {
-      id: 14,
-    },
-    component: () => import('@/pages/Echart/index.vue'),
-  },
-];
+]
+;

@@ -9,4 +9,8 @@ const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active', // 选中时添加的class类
 })
+router.beforeEach((to, from, next) => {
+  window.document.title = to.name || '';
+  next();
+})
 export default router;

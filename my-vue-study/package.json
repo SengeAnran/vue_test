@@ -16,6 +16,7 @@
     "echarts": "^5.4.2",
     "element-ui": "^2.15.13",
     "path": "^0.12.7",
+    "path-to-regexp": "^6.2.1",
     "sass-loader": "^13.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.6.5"
