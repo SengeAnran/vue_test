@@ -1,0 +1,15 @@
+{
+  "name": "snabbdom-test",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "dependencies": {
+    "snabbdom": "^3.5.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.82.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.3"
+  }
+}
