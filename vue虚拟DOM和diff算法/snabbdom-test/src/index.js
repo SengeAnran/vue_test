@@ -20,6 +20,8 @@ const myVNode3 = h('div', {}, '绅士手')
 const myVNode2 = h('div', {}, [
   h('p', {key: 'A'}, 'A'),
   h('p', {key: 'B'}, 'B'),
+  h('p', {key: 'M'}, 'M'),
+  h('p', {key: 'N'}, 'N'),
   h('p', {key: 'C'}, 'C'),
   h('p', {key: 'D'}, 'D'),
 ])
@@ -28,10 +30,10 @@ const myVNode2 = h('div', {}, [
 const container = document.querySelector('#container');
 const btn = document.querySelector('#btn');
 // // 上树
-patch(container, myVNode3);
+patch(container, myVNode1);
 btn.addEventListener('click', () => {
   console.log('改变');
-  patch(myVNode3, myVNode2);
+  patch(myVNode1, myVNode2);
 })
 // const patch = init([
 //   // Init patch function with chosen modules

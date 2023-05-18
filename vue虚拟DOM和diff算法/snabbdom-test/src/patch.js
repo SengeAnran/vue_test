@@ -18,7 +18,6 @@ export default function patch (oldVnode, newVnode) {
   // 判断是否为同一节点
   if (isSameNode(oldVnode, newVnode)) {
   //  进行精细化比较
-    console.log(oldVnode);
     patchVnode(oldVnode, newVnode);
   } else {
     console.log('暴力插入新节点,删除旧节点，');
