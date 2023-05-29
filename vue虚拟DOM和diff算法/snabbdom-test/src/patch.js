@@ -10,7 +10,9 @@ export default function patch (oldVnode, newVnode) {
 //  判断节点是否为dom节点
   if (isDomNode(oldVnode)) {
     console.log('老节点为DOM节点');
+    newVnode.elm = oldVnode; // 将新节点的elm赋值
     oldVnode = becomeVnode(oldVnode)
+
   }
   /**
    *  循环
