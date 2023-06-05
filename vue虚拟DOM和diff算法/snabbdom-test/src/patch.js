@@ -9,7 +9,7 @@ import patchVnode from './patchVnode';
 export default function patch (oldVnode, newVnode) {
 //  判断节点是否为dom节点
   if (isDomNode(oldVnode)) {
-    console.log('老节点为DOM节点');
+    // console.log('老节点为DOM节点');
     newVnode.elm = oldVnode; // 将新节点的elm赋值
     oldVnode = becomeVnode(oldVnode)
 
@@ -22,7 +22,7 @@ export default function patch (oldVnode, newVnode) {
   //  进行精细化比较
     patchVnode(oldVnode, newVnode);
   } else {
-    console.log('暴力插入新节点,删除旧节点，');
+    // console.log('暴力插入新节点,删除旧节点，');
     const newNode = createElement(newVnode)
     if (oldVnode.elm.parentNode && newNode) {
       // 在旧节点前插入新节点

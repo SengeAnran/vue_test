@@ -14,14 +14,11 @@ const myVNode1 = h('div', {}, [
   h('p', {key: 'A'}, 'A'),
   h('p', {key: 'B'}, 'B'),
   h('p', {key: 'C'}, 'C'),
-  h('p', {key: 'D'}, 'D'),
 ])
 const myVNode3 = h('div', {}, '绅士手')
 const myVNode2 = h('div', {}, [
   h('p', {key: 'A'}, 'A'),
   h('p', {key: 'B'}, 'B'),
-  h('p', {key: 'M'}, 'M'),
-  h('p', {key: 'N'}, 'N'),
   h('p', {key: 'C'}, 'C'),
   h('p', {key: 'D'}, 'D'),
 ])
