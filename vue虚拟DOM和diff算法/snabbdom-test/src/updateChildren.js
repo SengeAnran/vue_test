@@ -25,12 +25,18 @@ export default function updateChildren(parentElm, oldCh, newCh) {
       // 新前与旧前
       patchVnode(oldStartVnode, newStartVnode); // 对新旧节点进行精细化比较
       oldStartVnode = oldCh[++oldStartIdx];// 移动指针
-      newStartVnode = oldCh[++newStartIdx];// 移动指针
+      newStartVnode = newCh[++newStartIdx];// 移动指针
     }else if (checkSameVnode(newEndVnode, oldEndVnode)) {
       // 新后与旧后
-
+      patchVnode(oldEndVnode, newEndVnode); // 对新旧节点进行精细化比较
+      oldEndVnode = oldCh[--oldEndIdx];// 移动指针
+      newEndVnode = newCh[--newEndIdx];// 移动指针
     }else if (checkSameVnode(newEndVnode, oldStartVnode)) {
       // 新后与旧前
+      //将新后指向的节点方后旧后之后，将旧前置为undefined
+      patchVnode(oldStartVnode, newEndVnode); // 对新旧节点进行精细化比较
+      oldStartVnode.elm.parentNode.insert
+
 
     }else if (checkSameVnode(newStartVnode, oldEndVnode)) {
       // 新前与旧后
