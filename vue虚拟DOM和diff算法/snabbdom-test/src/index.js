@@ -11,16 +11,19 @@ import patch from './patch';
 // 创建出patch函数（diff算法核心）
 // 创建虚拟节点
 const myVNode1 = h('div', {}, [
-  h('p', {key: 'A'}, 'A'),
+
   h('p', {key: 'B'}, 'B'),
   h('p', {key: 'C'}, 'C'),
+  h('p', {key: 'A'}, 'A'),
 ])
 const myVNode3 = h('div', {}, '绅士手')
 const myVNode2 = h('div', {}, [
-  h('p', {key: 'A'}, 'A'),
-  h('p', {key: 'B'}, 'B'),
-  h('p', {key: 'C'}, 'C'),
-  h('p', {key: 'D'}, 'D'),
+  h('p', {key: 'C'}, 'Csss'),
+  // h('p', {key: 'D'}, 'D'),
+  // h('p', {key: 'B'}, 'B'),
+  // h('p', {key: 'A'}, 'Aaaaaa'),
+  h('p', {key: 'D'}, 'ddddd'),
+
 ])
 
 // 让虚拟节点上树

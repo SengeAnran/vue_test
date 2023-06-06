@@ -1,6 +1,12 @@
 import createElement from './createElement';
 import updateChildren from './updateChildren';
 
+/**
+ * 对oldVnode, newVnode节点进行精细化比较
+ * @param oldVnode
+ * @param newVnode
+ * @returns {*}
+ */
 export default function patchVnode (oldVnode, newVnode) {
   // console.log('进行精细化比较');
   // console.log('oldVnode',oldVnode)
@@ -8,11 +14,11 @@ export default function patchVnode (oldVnode, newVnode) {
   if (oldVnode === newVnode) return;
   //  判断newVnode有没有text属性
   if (newVnode.text !== undefined && ( newVnode.children === undefined || newVnode.children.length === 0)) {
+    newVnode.elm = oldVnode.elm; // 补充elm属性 （无论文字是不是一样都要提前补充elm属性）
     if (oldVnode.text === newVnode.text) return;
     // 如果新虚拟节 点中的text和老的虚拟节点的text不同，那么直接让新的text写入老的elm中即
     // 可。如果老的elm中是children,那么也会立即消失掉。
     // console.log('oldVnode.elm',oldVnode.elm)
-    newVnode.elm = oldVnode.elm; // 补充elm属性
     return oldVnode.elm.innerText = newVnode.text;
 
   }
