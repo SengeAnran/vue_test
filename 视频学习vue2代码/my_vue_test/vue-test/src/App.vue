@@ -2,17 +2,20 @@
   <div id="app">
     <School ref="school" @showOne=show ></School>
     <Student></Student>
+    <TodoList></TodoList>
   </div>
 </template>
 
 <script>
 import School from './components/School';
 import Student from './components/Student';
+import TodoList from './components/TodoList/index'
 export default {
   name: 'App',
   components: {
     Student,
     School,
+    TodoList,
   },
   mounted() {
     this.init();
