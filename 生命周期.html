@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./vue.js"></script>
+  <style>
+    .box {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <button @click="add">+1</button><br/>
+  <button @click="bey">bey</button>
+  <div class="box" :style="{opacity}" >欢迎学校Vue</div>
+  <p>我到值是： {{n}}</p>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      timer: null,
+      opacity: 0,
+      n: 0,
+    },
+    beforeCreate() {
+      console.log('beforeCreate');
+      // console.log(this);
+      // debugger;
+    },
+    created() {
+      console.log('created');
+      // console.log(this);
+      // debugger;
+    },
+    beforeMount(){
+      console.log('beforeMount');
+      console.log(this);
+      // debugger;
+    },
+    mounted() {// vue完成模版的解析并把正实的dom挂载到页面之后
+      console.log('mounted');
+      // this.becomeWay();
+    },
+    beforeUpdate() {
+      console.log('beforeUpload');
+      // console.log(this.n);
+      // debugger;
+    },
+    updated() {
+      console.log('updated');
+    },
+    beforeDestroy() {
+      console.log('beforeDestroy');
+      console.log(this);
+      debugger;
+      clearInterval(this.timer)
+    },
+    destroyed() {
+      console.log('destroyed');
+      console.log(this);
+    },
+    methods: {
+      becomeWay() {
+        this.timer = setInterval(() => {
+          this.opacity = (this.opacity + 0.01)%1;
+        }, 10)
+      },
+      add() {
+        ++this.n;
+      },
+      bey() {
+        console.log('bey');
+        this.$destroy();
+      },
+
+    }
+  })
+</script>
+</body>
+</html>
