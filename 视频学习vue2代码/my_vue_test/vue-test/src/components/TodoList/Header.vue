@@ -18,6 +18,7 @@ export default {
           id: undefined,
           name: this.value,
           complete: false,
+          isEdit: false,
       };
       this.$emit('addOne', obj);
       this.value = '';

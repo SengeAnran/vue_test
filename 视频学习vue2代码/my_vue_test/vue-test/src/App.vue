@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <School ref="school" @showOne=show ></School>
+    <School ref="school" @showOne=show ></School>
     <Student></Student>
     <TodoList></TodoList>
   </div>

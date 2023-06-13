@@ -1,7 +1,7 @@
 <template>
   <div class="todo-list">
     <Header @addOne="addOne"/>
-    <List :dataList="listData" @deleteOne="deleteOne" @checkOne="checkOne"/>
+    <List :dataList="listData"/>
     <Footer :allNumber="allNumber" :completeNumber="completeNumber" @changeAll="changeAll" @clearComplete="clearComplete"/>
   </div>
 </template>
@@ -10,6 +10,8 @@
 import Header from './Header';
 import List from './List';
 import Footer from './Footer';
+import {DELETEONE, CHECKONE, EDITONE} from '@/bus.js'
+import {NEWVALUE} from '../../bus';
 export default {
   name: "TodoList",
   components: {
@@ -41,10 +43,15 @@ export default {
   },
   mounted() {
     this.initData();
+    this.$bus.$on(DELETEONE,this.deleteOne);
+    this.$bus.$on(CHECKONE,this.checkOne);
+    this.$bus.$on(EDITONE,this.editOne);
+    this.$bus.$on(NEWVALUE,this.newValue);
   },
-  // beforeDestroy() {
-  //   this.storeData();
-  // },
+  beforeDestroy() {
+    // this.storeData();
+    this.$bus.$off([DELETEONE, CHECKONE,EDITONE]);
+  },
   computed: {
     allNumber() {
       return this.listData.length;
@@ -77,10 +84,21 @@ export default {
       });
     },
     deleteOne(index) {
+      console.log('接收到删除消息', index);
       this.listData.splice(index, 1);
     },
     checkOne(index) {
+      console.log('接收到选中消息', index);
       this.listData[index].complete = !this.listData[index].complete;
+    },
+    editOne(index) {
+      console.log('接收到编辑消息', index);
+      this.listData[index].isEdit =  true;
+    },
+    newValue(index, value) {
+      console.log('接收到编辑消息', index, value);
+      this.listData[index].name =  value;
+      this.listData[index].isEdit =  false;
     },
     clearComplete() {
       this.listData = this.listData.filter(i => !i.complete);

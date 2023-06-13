@@ -3,9 +3,7 @@
   <ListItem
     v-for="(item, index) in dataList"
     :key="item.name"
-    :objData="item"
-    @deleteOne="$emit('deleteOne', index)"
-    @checkOne="$emit('checkOne',index)"
+    :objData="{...item, index}"
   ></ListItem>
 </div>
 </template>

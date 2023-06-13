@@ -7,4 +7,7 @@ Vue.use(myPlugins);
 let a = 'ssg';
 new Vue({
   render: h => h(App),
+  beforeMount() {
+    Vue.prototype.$bus = this;
+  }
 }).$mount('#app')
