@@ -4,6 +4,9 @@
     <School ref="school" @showOne=show ></School>
     <Student></Student>
     <TodoList></TodoList>
+    <StyleTranstion></StyleTranstion>
+    <StyleTranstion2></StyleTranstion2>
+    <StyleTranstion3></StyleTranstion3>
   </div>
 </template>
 
@@ -11,12 +14,18 @@
 import School from './components/School';
 import Student from './components/Student';
 import TodoList from './components/TodoList/index'
+import StyleTranstion from './components/Transition/StyleTranstion'
+import StyleTranstion2 from './components/Transition/StyleTranstion2'
+import StyleTranstion3 from './components/Transition/StyleTranstion3'
 export default {
   name: 'App',
   components: {
     Student,
     School,
     TodoList,
+    StyleTranstion,
+    StyleTranstion2,
+    StyleTranstion3,
   },
   mounted() {
     this.init();
