@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+  }
+  ul {
+    width: 1500px;
+    height: 1200px;
+    background-color: antiquewhite;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    width: 100px;
+    height: 80px;
+    background-color: orange;
+    margin-right: 20px;
+  }
+  li:nth-child(12n) {
+    margin-right: 0px;
+  }
+
+  li:hover {
+    background-color: darkblue;
+  }
+  .container {
+    position: relative;
+    width: 1500px;
+    height: 1200px;
+    overflow: hidden;
+  }
+</style>
+<body>
+<div class="main">
+  <div class="container">
+    <ul class="ul">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+      <li>23</li>
+      <li>24</li>
+      <li>25</li>
+      <li>26</li>
+      <li>27</li>
+      <li>28</li>
+      <li>29</li>
+      <li>30</li>
+      <li>31</li>
+      <li>32</li>
+      <li>33</li>
+      <li>34</li>
+      <li>35</li>
+      <li>36</li>
+      <li>37</li>
+      <li>38</li>
+      <li>39</li>
+      <li>40</li>
+      <li>41</li>
+      <li>42</li>
+      <li>43</li>
+      <li>44</li>
+      <li>45</li>
+      <li>46</li>
+      <li>47</li>
+      <li>48</li>
+      <li>49</li>
+      <li>50</li>
+      <li>51</li>
+      <li>52</li>
+      <li>53</li>
+      <li>54</li>
+      <li>55</li>
+      <li>56</li>
+      <li>57</li>
+      <li>58</li>
+      <li>59</li>
+      <li>60</li>
+      <li>61</li>
+      <li>62</li>
+      <li>63</li>
+      <li>64</li>
+      <li>65</li>
+      <li>66</li>
+      <li>67</li>
+      <li>68</li>
+      <li>69</li>
+      <li>70</li>
+      <li>71</li>
+      <li>72</li>
+      <li>73</li>
+      <li>74</li>
+      <li>75</li>
+      <li>76</li>
+      <li>77</li>
+      <li>78</li>
+      <li>79</li>
+      <li>80</li>
+      <li>81</li>
+      <li>82</li>
+      <li>83</li>
+      <li>84</li>
+      <li>85</li>
+      <li>86</li>
+      <li>87</li>
+      <li>88</li>
+      <li>89</li>
+      <li>90</li>
+      <li>91</li>
+      <li>92</li>
+      <li>93</li>
+      <li>94</li>
+      <li>95</li>
+      <li>96</li>
+      <li>97</li>
+      <li>98</li>
+      <li>99</li>
+      <li>100</li>
+      <li>101</li>
+    </ul>
+
+  </div>
+</div>
+</body>
+<script>
+  const container = document.querySelector('.container');
+  const ul = document.querySelector('.ul');
+  // 变量
+  let result,
+    x = 0, // x轴偏移量
+    y = 0, // y轴偏移量
+    scale = 1,// 缩放比例
+    ulWidth = 1500, //缩放区域宽度
+    ulHeight = 1200, // 缩放区域高度
+    minScale = 1, // 最小缩放比例
+    maxScale = 4; // 最大缩放比例
+    isDown = false, // 按下标识
+    diff = { x: 0, y: 0 }, // 相对于上一次lastPointermove移动差值
+    lastPointermove = { x: 0, y: 0 }; // 用于计算diff
+  ul.style.width = ulWidth + 'px';
+  ul.style.height = ulHeight + 'px';
+  ul.style.transform = 'matrix(1, 0, 0, 1, 0, 0)'; // 初始化缩放比例
+
+  // // 拖拽查看
+  // // 绑定鼠标点击
+  // ul.addEventListener('mousedown', function (e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   isDown = true;
+  //   lastPointermove = { x: e.clientX, y: e.clientY };
+  // });
+  // // 绑定鼠标移动
+  // ul.addEventListener('mousemove', function (e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   console.log(x,y);
+  //   if (isDown) {
+  //     const current1 = { x: e.clientX, y: e.clientY };
+  //     diff.x = current1.x - lastPointermove.x;
+  //     diff.y = current1.y - lastPointermove.y;
+  //     lastPointermove = { x: current1.x, y: current1.y };
+  //     x += diff.x;
+  //     y += diff.y;
+  //     console.log('偏移量','x:' + x, 'y' + y);
+  //
+  //     //边界判断
+  //     let offsetX = Math.min(Math.max(x, ulWidth - ulWidth * (scale + 1) / 2), + ulWidth * (scale - 1) / 2);
+  //     let offsetY = Math.min(Math.max(y, ulHeight - ulHeight * (scale + 1) / 2), + ulHeight * (scale - 1) / 2);
+  //     ul.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${offsetX}, ${offsetY})`;
+  //     console.log('offsetX', offsetX, offsetY);
+  //   }
+  // });
+  // // 绑定鼠标抬起
+  // document.addEventListener('mouseup', () => {
+  //   isDown = false;
+  // })
+
+  // 滚轮缩放、放大逻辑
+  /**
+   * 滚轮缩放、放大逻辑
+   * X轴的(window.innerWidth - ulWidth) * 0.5)主要判断节点距离左边边距，y轴同样
+   * 同样采用Math判断边界
+   */
+  ul.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    let ratio = 1.1; // 放大比率
+    // 缩小
+    if (e.deltaY > 0) {
+      ratio = 1 / 1.1; // 缩小比率
+    }
+    // 限制缩放倍数
+    const onscale = scale * ratio; // 缩放比例
+    if (onscale > maxScale) {
+      ratio = maxScale / scale;
+      scale = maxScale;
+    } else if (onscale < minScale) {
+      ratio = minScale / scale;
+      scale = minScale;
+    } else {
+      scale = onscale;
+    }
+    const origin = {
+      x: (ratio - 1) * ulWidth * 0.5, //x轴方向增加或减少长度的一半
+      y: (ratio - 1) * ulHeight * 0.5, //y轴方向增加或减少长度的一半
+    };
+    // 计算偏移量
+    x -= (ratio - 1) * (e.clientX - x - (window.innerWidth - ulWidth) * 0.5) - origin.x;
+    y -= (ratio - 1) * (e.clientY - y) - origin.y;
+    let offsetX = Math.min(Math.max(x, ulWidth - ulWidth * (scale + 1) / 2), ulWidth * (scale - 1) / 2);
+    let offsetY = Math.min(Math.max(y, ulHeight - ulHeight * (scale + 1) / 2), + ulHeight * (scale - 1) / 2);
+    x = offsetX;
+    y = offsetY;
+    ul.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${offsetX}, ${offsetY})`;
+    console.log(x,y);
+
+  });
+</script>
+
+</html>

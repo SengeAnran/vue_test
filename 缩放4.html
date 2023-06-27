@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .box{
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 200px auto;
+      width: 202px;
+      height: 202px;
+      background-color: gainsboro;
+      border: 1px solid black;
+    }
+    .box-inter {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <div class="box-inter" id="scaleBox">1</div>
+  <div class="box-inter">2</div>
+  <div class="box-inter">3</div>
+  <div class="box-inter">4</div>
+</div>
+<script>
+  let isDown, // 操作中
+    scale = 1,
+    x = 0, // x轴偏移量
+    y = 0, // y轴偏移量
+    minScale = 1, // 最小缩放比例
+    maxScale = 4; // 最大缩放比例
+    boxWidth = 50,
+    boxHeight = 50,
+    diff = { x: 0, y: 0 }, // 相对于上一次lastPointermove移动差值
+    lastPointermove = { x: 0, y: 0 }; // 用于计算diff
+  const scaleDom = document.querySelector('#scaleBox');
+  scaleDom.style.transform = `matrix(${scale}, 0,0, ${scale},0, 0)`;
+  // scaleDom.addEventListener('mousedown', function (e) {
+  //   // console.log(e.clientX,e.clientY)
+  //   // console.log(e.offsetX,e.offsetY)
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   isDown = true;
+  // });
+  // scaleDom.addEventListener('mousemove', function (e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   if (isDown) {
+  //     const current1 = {
+  //       x: e.clientX, y:e.clientY
+  //     };
+  //     diff.x = current1.x - lastPointermove.x;
+  //     diff.y = current1.y - lastPointermove.y;
+  //     lastPointermove = { x: current1.x, y: current1.y};
+  //     x += diff.x;
+  //     y += diff.y;
+  //     console.log('偏移量','x:' + x, 'y' + y);
+  //     // 判断边界
+  //     // let offsetX = Math.max(x,boxWidth - boxWidth*(scale + 1)/2);
+  //     let offsetX = Math.min(Math.max(x,boxWidth - boxWidth*(scale + 1)/2),boxWidth *(scale -1) /2)
+  //     // let offsetX = Math.min(Math.max(x,boxWidth - boxWidth*(scale + 1)/2),boxWidth *(scale -1) /2)
+  //     let offsetY = 0;
+  //     console.log('offsetX', offsetX, offsetY);
+  //     scaleDom.style.transform = `matrix(${scale}, 0,0, ${scale}, ${offsetX}, ${offsetY})`;
+  //   }
+  //
+  // });
+  // scaleDom.addEventListener('mousemove', function (e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   isDown = false;
+  // });
+  // 滚轮缩放、放大逻辑
+  /**
+   * 滚轮缩放、放大逻辑
+   * X轴的(window.innerWidth - boxWidth) * 0.5)主要判断节点距离左边边距，y轴同样
+   * 同样采用Math判断边界
+   */
+  scaleDom.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    let ratio = 1.1; // 放大比率
+    // 缩小
+    if (e.deltaY > 0) {
+      ratio = 1 / 1.1; // 缩小比率
+    }
+    // 限制缩放倍数
+    const onscale = scale * ratio; // 缩放比例
+    if (onscale > maxScale) {
+      ratio = maxScale / scale;
+      scale = maxScale;
+    } else if (onscale < minScale) {
+      ratio = minScale / scale;
+      scale = minScale;
+    } else {
+      scale = onscale;
+    }
+    const origin = {
+      x: (ratio - 1) * boxWidth * 0.5, //x轴方向增加或减少长度的一半
+      y: (ratio - 1) * boxHeight * 0.5, //y轴方向增加或减少长度的一半
+    };
+    // 计算偏移量
+    x -= (ratio - 1) * (e.clientX - x - (window.innerWidth - boxWidth) * 0.5) - origin.x;
+    y -= (ratio - 1) * (e.clientY - y) - origin.y;
+    let offsetX = Math.min(Math.max(x, boxWidth - boxWidth * (scale + 1) / 2), boxWidth * (scale - 1) / 2);
+    let offsetY = Math.min(Math.max(y, boxHeight - boxHeight * (scale + 1) / 2), + boxHeight * (scale - 1) / 2);
+    x = offsetX;
+    y = offsetY;
+    scaleDom.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${offsetX}, ${offsetY})`;
+    console.log(x,y);
+
+  });
+</script>
+</body>
+</html>
