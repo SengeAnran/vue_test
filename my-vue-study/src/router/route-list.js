@@ -40,7 +40,12 @@ export const routes = [
       //     id: 14,
       //   },
       //   component: () => import('@/pages/about.vue'),
-      // }
+      // },
+      {
+        path: 'vuex',
+        name: '状态管理',
+        component: () => import('@/pages/Vuex/index.vue'),
+      }
     ]
   },
   {
