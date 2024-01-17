@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "axios": "^1.6.5",
     "core-js": "^3.6.5",
+    "element-ui": "^2.15.14",
     "path": "^0.12.7",
+    "pdfjs": "^2.5.3",
+    "pdfjs-dist": "^2.3.200",
     "pubsub-js": "^1.9.4",
     "pubsub.js": "^1.5.2",
     "vue": "^2.6.11"

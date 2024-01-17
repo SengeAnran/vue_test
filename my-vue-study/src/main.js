@@ -7,9 +7,9 @@ import 'animate.css';
 import router from './router/index';
 import less from 'less'
 import store from './store/index'
-import { Button, Cascader } from 'element-ui';
-Vue.component(Button.name, Button);
-Vue.component(Cascader.name, Cascader);
+// import { Button, Cascader } from 'element-ui';
+// Vue.component(Button.name, Button);
+// Vue.component(Cascader.name, Cascader);
 
 Vue.use(less)
 // Vue.use(ElementUI)

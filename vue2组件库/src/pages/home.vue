@@ -1,13 +1,16 @@
 <template>
   <div class="page">
-    首页
+    <Pay/>
   </div>
 
 </template>
 
 <script>
+import Pay from './Pay/index.vue'
+
 export default {
-  name: 'home'
+  name: 'home',
+  components: {Pay}
 }
 </script>
 

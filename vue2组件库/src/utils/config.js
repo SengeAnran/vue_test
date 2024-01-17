@@ -1,5 +1,6 @@
 const proConfig = {
   // 未来乡村工作
+  requestBaseUrl: '/v2/admin/apiProxy',
   apiHost: '/v2/admin/apiProxy',
   apiHost2: '/v2/admin/apiWX',
   apiHost3: '/v2/admin/apiWX',
@@ -18,6 +19,7 @@ const proConfig = {
 };
 
 const devConfig = {
+  requestBaseUrl: '/apiProxy', // 历史文化
   apiHost: '/apiProxy', // 历史文化
   // apiHost: "http://172.16.27.121:8280", // 历史文化
   apiHost2: '/apiWX', // 未来乡村

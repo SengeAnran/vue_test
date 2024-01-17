@@ -52,7 +52,7 @@ service.interceptors.response.use(
       console.log('Request canceled');
       return null;
     }
-    const res = error.response?.data || {};
+    const res = error.response.data || {};
 
     Message.error({ message: res.msg || '未知异常！', showClose: true });
     if (res.code === 2001) {
